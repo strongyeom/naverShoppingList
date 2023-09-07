@@ -14,6 +14,11 @@
 		26F617C12AAA1602002061C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F617BF2AAA1602002061C4 /* LaunchScreen.storyboard */; };
 		26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617CA2AAA16E8002061C4 /* TabBarController.swift */; };
 		26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617CC2AAA1734002061C4 /* ListViewController.swift */; };
+		26F617D32AAA1C27002061C4 /* NaverShopping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617D22AAA1C27002061C4 /* NaverShopping.swift */; };
+		26F617D62AAA1D08002061C4 /* NetwokeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617D52AAA1D08002061C4 /* NetwokeManager.swift */; };
+		26F617D92AAA1D56002061C4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617D82AAA1D56002061C4 /* Alamofire */; };
+		26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617E12AAA203D002061C4 /* ProductSort.swift */; };
+		26F617E42AAA2094002061C4 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617E32AAA2094002061C4 /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,10 @@
 		26F617C22AAA1602002061C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26F617CA2AAA16E8002061C4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		26F617CC2AAA1734002061C4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		26F617D22AAA1C27002061C4 /* NaverShopping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverShopping.swift; sourceTree = "<group>"; };
+		26F617D52AAA1D08002061C4 /* NetwokeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokeManager.swift; sourceTree = "<group>"; };
+		26F617E12AAA203D002061C4 /* ProductSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSort.swift; sourceTree = "<group>"; };
+		26F617E32AAA2094002061C4 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F617D92AAA1D56002061C4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +70,9 @@
 			children = (
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
+				26F617E02AAA2033002061C4 /* Enum */,
+				26F617D42AAA1CF4002061C4 /* Network */,
+				26F617D12AAA1C19002061C4 /* Model */,
 				26F617D02AAA198C002061C4 /* TabBar */,
 				26F617CF2AAA1989002061C4 /* ListVC */,
 				26F617CE2AAA1987002061C4 /* SearchVC */,
@@ -94,6 +107,31 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		26F617D12AAA1C19002061C4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				26F617D22AAA1C27002061C4 /* NaverShopping.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		26F617D42AAA1CF4002061C4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				26F617D52AAA1D08002061C4 /* NetwokeManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		26F617E02AAA2033002061C4 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				26F617E12AAA203D002061C4 /* ProductSort.swift */,
+				26F617E32AAA2094002061C4 /* NetworkError.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -110,6 +148,9 @@
 			dependencies = (
 			);
 			name = naverShoppingList;
+			packageProductDependencies = (
+				26F617D82AAA1D56002061C4 /* Alamofire */,
+			);
 			productName = naverShoppingList;
 			productReference = 26F617B12AAA15FD002061C4 /* naverShoppingList.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +179,9 @@
 				Base,
 			);
 			mainGroup = 26F617A82AAA15FD002061C4;
+			packageReferences = (
+				26F617D72AAA1D56002061C4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 26F617B22AAA15FD002061C4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -166,9 +210,13 @@
 			files = (
 				26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */,
 				26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */,
+				26F617D32AAA1C27002061C4 /* NaverShopping.swift in Sources */,
 				26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */,
 				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
+				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,
+				26F617E42AAA2094002061C4 /* NetworkError.swift in Sources */,
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
+				26F617D62AAA1D08002061C4 /* NetwokeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +422,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		26F617D72AAA1D56002061C4 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		26F617D82AAA1D56002061C4 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26F617D72AAA1D56002061C4 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 26F617A92AAA15FD002061C4 /* Project object */;
 }

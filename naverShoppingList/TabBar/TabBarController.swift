@@ -14,7 +14,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let search = SearchViewCo/Users/yeomseongpil/Desktop/새싹/2차 Recap/naverShoppingList/naverShoppingListntroller()
+        let search = SearchViewController()
         search.tabBarItem.title = "검색"
         search.tabBarItem.image = UIImage(systemName: "magnifyingglass")
         search.navigationItem.title = "쇼핑 검색"
