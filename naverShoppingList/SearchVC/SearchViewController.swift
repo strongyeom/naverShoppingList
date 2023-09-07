@@ -15,6 +15,7 @@ class SearchViewController: UIViewController {
         NetwokeManager.shared.callRequest(searText: "캠핑카", display: 30, start: 1, sort: .sim) { response in
             print("viewdidload",response!)
         }
+
     }
 
 

@@ -19,6 +19,14 @@
 		26F617D92AAA1D56002061C4 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617D82AAA1D56002061C4 /* Alamofire */; };
 		26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617E12AAA203D002061C4 /* ProductSort.swift */; };
 		26F617E42AAA2094002061C4 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617E32AAA2094002061C4 /* NetworkError.swift */; };
+		26F617E72AAA2DDE002061C4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617E62AAA2DDE002061C4 /* Realm */; };
+		26F617E92AAA2DDE002061C4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617E82AAA2DDE002061C4 /* RealmSwift */; };
+		26F617EB2AAA2DF3002061C4 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617EA2AAA2DF3002061C4 /* RealmModel.swift */; };
+		26F617F12AAA34BA002061C4 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617F02AAA34BA002061C4 /* BaseViewController.swift */; };
+		26F617F32AAA3571002061C4 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617F22AAA3571002061C4 /* BaseCollectionViewCell.swift */; };
+		26F617F52AAA35B9002061C4 /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617F42AAA35B9002061C4 /* BaseCollectionView.swift */; };
+		26F617F82AAA382D002061C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617F72AAA382D002061C4 /* SnapKit */; };
+		26F617FB2AAA3944002061C4 /* ReuseIentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +43,11 @@
 		26F617D52AAA1D08002061C4 /* NetwokeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetwokeManager.swift; sourceTree = "<group>"; };
 		26F617E12AAA203D002061C4 /* ProductSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSort.swift; sourceTree = "<group>"; };
 		26F617E32AAA2094002061C4 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		26F617EA2AAA2DF3002061C4 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
+		26F617F02AAA34BA002061C4 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		26F617F22AAA3571002061C4 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		26F617F42AAA35B9002061C4 /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
+		26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIentifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +55,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26F617E92AAA2DDE002061C4 /* RealmSwift in Frameworks */,
+				26F617F82AAA382D002061C4 /* SnapKit in Frameworks */,
+				26F617E72AAA2DDE002061C4 /* Realm in Frameworks */,
 				26F617D92AAA1D56002061C4 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +84,8 @@
 		26F617B32AAA15FD002061C4 /* naverShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				26F617F92AAA3935002061C4 /* Protocol */,
+				26F617EF2AAA34AE002061C4 /* Base */,
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
 				26F617E02AAA2033002061C4 /* Enum */,
@@ -111,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				26F617D22AAA1C27002061C4 /* NaverShopping.swift */,
+				26F617EA2AAA2DF3002061C4 /* RealmModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -132,6 +151,24 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		26F617EF2AAA34AE002061C4 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				26F617F02AAA34BA002061C4 /* BaseViewController.swift */,
+				26F617F22AAA3571002061C4 /* BaseCollectionViewCell.swift */,
+				26F617F42AAA35B9002061C4 /* BaseCollectionView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		26F617F92AAA3935002061C4 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,6 +187,9 @@
 			name = naverShoppingList;
 			packageProductDependencies = (
 				26F617D82AAA1D56002061C4 /* Alamofire */,
+				26F617E62AAA2DDE002061C4 /* Realm */,
+				26F617E82AAA2DDE002061C4 /* RealmSwift */,
+				26F617F72AAA382D002061C4 /* SnapKit */,
 			);
 			productName = naverShoppingList;
 			productReference = 26F617B12AAA15FD002061C4 /* naverShoppingList.app */;
@@ -181,6 +221,8 @@
 			mainGroup = 26F617A82AAA15FD002061C4;
 			packageReferences = (
 				26F617D72AAA1D56002061C4 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				26F617E52AAA2DDE002061C4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				26F617F62AAA382D002061C4 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 26F617B22AAA15FD002061C4 /* Products */;
 			projectDirPath = "";
@@ -209,8 +251,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */,
+				26F617F52AAA35B9002061C4 /* BaseCollectionView.swift in Sources */,
+				26F617FB2AAA3944002061C4 /* ReuseIentifier.swift in Sources */,
 				26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */,
+				26F617F12AAA34BA002061C4 /* BaseViewController.swift in Sources */,
 				26F617D32AAA1C27002061C4 /* NaverShopping.swift in Sources */,
+				26F617EB2AAA2DF3002061C4 /* RealmModel.swift in Sources */,
+				26F617F32AAA3571002061C4 /* BaseCollectionViewCell.swift in Sources */,
 				26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */,
 				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
 				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,
@@ -440,6 +487,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		26F617E52AAA2DDE002061C4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		26F617F62AAA382D002061C4 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -447,6 +510,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 26F617D72AAA1D56002061C4 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		26F617E62AAA2DDE002061C4 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26F617E52AAA2DDE002061C4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		26F617E82AAA2DDE002061C4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26F617E52AAA2DDE002061C4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		26F617F72AAA382D002061C4 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26F617F62AAA382D002061C4 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
