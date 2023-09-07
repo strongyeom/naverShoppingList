@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B42AAA15FD002061C4 /* AppDelegate.swift */; };
 		26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B62AAA15FD002061C4 /* SceneDelegate.swift */; };
-		26F617B92AAA15FD002061C4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B82AAA15FD002061C4 /* ViewController.swift */; };
-		26F617BC2AAA15FD002061C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F617BA2AAA15FD002061C4 /* Main.storyboard */; };
+		26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B82AAA15FD002061C4 /* SearchViewController.swift */; };
 		26F617BE2AAA1602002061C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F617BD2AAA1602002061C4 /* Assets.xcassets */; };
 		26F617C12AAA1602002061C4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F617BF2AAA1602002061C4 /* LaunchScreen.storyboard */; };
+		26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617CA2AAA16E8002061C4 /* TabBarController.swift */; };
+		26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617CC2AAA1734002061C4 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		26F617B12AAA15FD002061C4 /* naverShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = naverShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F617B42AAA15FD002061C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26F617B62AAA15FD002061C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		26F617B82AAA15FD002061C4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		26F617BB2AAA15FD002061C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		26F617B82AAA15FD002061C4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		26F617BD2AAA1602002061C4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26F617C02AAA1602002061C4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26F617C22AAA1602002061C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26F617CA2AAA16E8002061C4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		26F617CC2AAA1734002061C4 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,13 +60,38 @@
 			children = (
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
-				26F617B82AAA15FD002061C4 /* ViewController.swift */,
-				26F617BA2AAA15FD002061C4 /* Main.storyboard */,
+				26F617D02AAA198C002061C4 /* TabBar */,
+				26F617CF2AAA1989002061C4 /* ListVC */,
+				26F617CE2AAA1987002061C4 /* SearchVC */,
 				26F617BD2AAA1602002061C4 /* Assets.xcassets */,
 				26F617BF2AAA1602002061C4 /* LaunchScreen.storyboard */,
 				26F617C22AAA1602002061C4 /* Info.plist */,
 			);
 			path = naverShoppingList;
+			sourceTree = "<group>";
+		};
+		26F617CE2AAA1987002061C4 /* SearchVC */ = {
+			isa = PBXGroup;
+			children = (
+				26F617B82AAA15FD002061C4 /* SearchViewController.swift */,
+			);
+			path = SearchVC;
+			sourceTree = "<group>";
+		};
+		26F617CF2AAA1989002061C4 /* ListVC */ = {
+			isa = PBXGroup;
+			children = (
+				26F617CC2AAA1734002061C4 /* ListViewController.swift */,
+			);
+			path = ListVC;
+			sourceTree = "<group>";
+		};
+		26F617D02AAA198C002061C4 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				26F617CA2AAA16E8002061C4 /* TabBarController.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +154,6 @@
 			files = (
 				26F617C12AAA1602002061C4 /* LaunchScreen.storyboard in Resources */,
 				26F617BE2AAA1602002061C4 /* Assets.xcassets in Resources */,
-				26F617BC2AAA15FD002061C4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +164,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26F617B92AAA15FD002061C4 /* ViewController.swift in Sources */,
+				26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */,
+				26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */,
 				26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */,
+				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +175,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		26F617BA2AAA15FD002061C4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				26F617BB2AAA15FD002061C4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		26F617BF2AAA1602002061C4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -291,7 +311,6 @@
 				INFOPLIST_FILE = naverShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -318,7 +337,6 @@
 				INFOPLIST_FILE = naverShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
