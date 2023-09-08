@@ -107,4 +107,9 @@ class BaseCollectionViewCell : UICollectionViewCell {
             malNameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
             priceLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        shoppingImage.image = nil
+    }
 }

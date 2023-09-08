@@ -25,8 +25,8 @@ class SearchViewController: UIViewController {
     let searView =  SearchView()
     let categortView = CategoryView()
     
-    var searText: String?
-    var start = 9
+    
+    var start = 1
     var sort: ProductSort = .sim
     
 
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController {
         view.addSubview(searchCollectionView)
         view.addSubview(searView)
         view.addSubview(categortView)
-        callRequest(searText: "캠핑카", start: start, sort: .sim)
+      //  callRequest(searText: "캠핑카", start: start, sort: .sim)
     
     }
 
@@ -79,6 +79,10 @@ class SearchViewController: UIViewController {
             make.top.equalTo(categortView.snp.bottom)
             make.horizontalEdges.bottom.equalToSuperview()
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 
 }
@@ -125,24 +129,29 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
             
             if shoppingList.items.count - 1 == indexPath.item {
                 start += 1
-                print("이거 왜?")
-                guard let searText else { return }
-                callRequest(searText: searText, start: start, sort: .sim)
+                callRequest(searText: "캠핑카", start: start, sort: .sim)
             }
         }
     }
     func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
-        
+        print("===== cancelPrefetchingForItemsAt")
     }
 }
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
         print("search 취소버튼 눌림")
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("리턴 버튼 눌림")
+        if let text = searchBar.text {
+            self.shoppingList.items.removeAll()
+            start = 1
+            callRequest(searText: text, start: start, sort: .sim)
+        }
+        view.endEditing(true)
     }
     
 }
