@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
         let search = SearchViewController()
         search.tabBarItem.title = "검색"
         search.tabBarItem.image = UIImage(systemName: "magnifyingglass")
-        search.navigationItem.title = "쇼핑 검색"
+       
         
         let list = ListViewController()
         list.tabBarItem.title = "좋아요"
@@ -25,12 +25,17 @@ class TabBarController: UITabBarController {
         list.navigationItem.title = "좋아요 목록"
         
         
+
+               
+        
         let searchHome = UINavigationController(rootViewController: search)
         let listHome = UINavigationController(rootViewController: list)
         
         self.tabBar.isTranslucent = false
         UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
+       
+
         
         setViewControllers([searchHome, listHome], animated: false)
         

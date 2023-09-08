@@ -30,6 +30,18 @@ class SearchViewController: UIViewController {
         configureView()
         setConstraints()
         settup()
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .black
+
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+       
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .white
+        title = "쇼핑 검색"
     }
     
     func settup() {
@@ -71,7 +83,15 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell = shoppingList.items[indexPath.item]
+        let vc = DetailViewController()
+        vc.detailProduct = selectedCell
+        navigationController?.pushViewController(vc, animated: true)
+        
+        
+        
+    }
 }
 
 extension SearchViewController: UICollectionViewDataSource {
@@ -86,9 +106,9 @@ extension SearchViewController: UICollectionViewDataSource {
         let url = URL(string: data.image)!
         cell.shoppingImage.kf.setImage(with: url)
         
-        let decodingText = data.title.components(separatedBy: ["<","b","/",">"]).joined()
+        
         cell.malNameLabel.text = data.mallName
-        cell.productName.text = decodingText
+        cell.productName.text = encodingText(text: data.title)
         cell.priceLabel.text =  "\(example(price: data.lprice))원"
         return cell
     }
