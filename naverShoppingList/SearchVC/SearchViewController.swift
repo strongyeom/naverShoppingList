@@ -87,39 +87,7 @@ class SearchViewController: UIViewController {
 
 }
 
-extension SearchViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCell = shoppingList.items[indexPath.item]
-        let vc = DetailViewController()
-        vc.detailProduct = selectedCell
-        navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
-    }
-}
-
-extension SearchViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shoppingList.items.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
-        let data = shoppingList.items[indexPath.item]
-        
-        let url = URL(string: data.image)!
-        cell.shoppingImage.kf.setImage(with: url)
-        
-        
-        cell.malNameLabel.text = data.mallName
-        cell.productName.text = encodingText(text: data.title)
-        cell.priceLabel.text =  "\(example(price: data.lprice))원"
-        return cell
-    }
-}
-
-
+// MARK: - UICollectionViewDataSourcePrefetching
 extension SearchViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         
@@ -137,6 +105,48 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
         print("===== cancelPrefetchingForItemsAt")
     }
 }
+
+extension SearchViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let selectedCell = shoppingList.items[indexPath.item]
+//        let vc = DetailViewController()
+//        vc.detailProduct = selectedCell
+//        navigationController?.pushViewController(vc, animated: true)
+//
+        
+        
+    }
+}
+
+extension SearchViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return shoppingList.items.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
+        let data = shoppingList.items[indexPath.item]
+        
+        let url = URL(string: data.image)!
+        cell.shoppingImage.kf.setImage(with: url)
+        
+       
+        cell.malNameLabel.text = data.mallName
+        cell.productName.text = encodingText(text: data.title)
+        cell.priceLabel.text =  "\(example(price: data.lprice))원"
+        cell.likeButton.tag = indexPath.item
+        print("\(cell.likeButton.tag)")
+        cell.likeButton.addTarget(self, action: #selector(likeBtnClicked(_:)), for: .touchUpInside)
+        return cell
+    }
+    
+    @objc func likeBtnClicked(_ sender: UIButton) {
+        print("좋아요 버튼 눌림 \(sender.tag)")
+    }
+}
+
+
+
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

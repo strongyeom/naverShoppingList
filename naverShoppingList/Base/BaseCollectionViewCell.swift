@@ -47,7 +47,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
     let likeButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "heart"), for: .normal)
-        view.backgroundColor = .white
+        view.backgroundColor = .red
         view.tintColor = .black
         return view
     }()
