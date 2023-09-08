@@ -28,12 +28,9 @@ class TabBarController: UITabBarController {
         let searchHome = UINavigationController(rootViewController: search)
         let listHome = UINavigationController(rootViewController: list)
         
-        
-        self.tabBar.tintColor = UIColor.black // tab bar icon tint color
         self.tabBar.isTranslucent = false
-        UITabBar.appearance().barTintColor = UIColor.white
+        UITabBar.appearance().barTintColor = UIColor.black
         UITabBar.appearance().tintColor = UIColor.white
-        
         
         setViewControllers([searchHome, listHome], animated: false)
         

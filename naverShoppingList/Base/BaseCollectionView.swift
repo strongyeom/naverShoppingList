@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class BaseCollectionView : UICollectionViewController {
+class BaseCollectionView : UIView {
     
     lazy var baseCollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
@@ -28,14 +28,24 @@ class BaseCollectionView : UICollectionViewController {
         return layout
         
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        configureView()
+//        setConstraints()
+//    }
+//
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         configureView()
         setConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func configureView() {
-        view.addSubview(baseCollectionView)
+        self.addSubview(baseCollectionView)
     }
     
     func setConstraints() {
