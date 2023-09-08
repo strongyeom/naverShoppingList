@@ -10,7 +10,7 @@ import Foundation
 // MARK: - NaverShopping
 struct NaverShopping: Codable {
     let total, start, display: Int
-    let items: [Item]
+    var items: [Item]
 }
 
 // MARK: - Item
