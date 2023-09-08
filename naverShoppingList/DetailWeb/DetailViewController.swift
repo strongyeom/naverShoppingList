@@ -29,8 +29,13 @@ class DetailViewController: UIViewController {
         webView.load(myRequest)
  
         navigationItem.title = encodingText(text: detailProduct.title)
-         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likeBtnClicked(_:)))
 
+    }
+    
+    @objc func likeBtnClicked(_ sender: UIBarButtonItem) {
+        print("좋아요 버튼 ")
+        // 좋아요 눌렸으면 하트 색상 바꿔져 있어야함
     }
     
     func setConstraints() {

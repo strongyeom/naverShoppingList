@@ -17,6 +17,7 @@ class SearchViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
         view.delegate = self
         view.dataSource = self
+        view.prefetchDataSource = self
         view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
         return view
     }()
@@ -24,24 +25,20 @@ class SearchViewController: UIViewController {
     let searView =  SearchView()
     let categortView = CategoryView()
     
+    var searText: String?
+    var start = 9
+    var sort: ProductSort = .sim
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         setConstraints()
         settup()
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .black
+        setNavigation()
 
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.standardAppearance = appearance
+        
        
-        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationItem.backButtonTitle = ""
-        navigationController?.navigationBar.tintColor = .white
-        title = "쇼핑 검색"
     }
     
     func settup() {
@@ -53,8 +50,12 @@ class SearchViewController: UIViewController {
         view.addSubview(searchCollectionView)
         view.addSubview(searView)
         view.addSubview(categortView)
-        
-        NetwokeManager.shared.callRequest(searText: "캠핑카", display: 30, start: 1, sort: .sim) { response in
+        callRequest(searText: "캠핑카", start: start, sort: .sim)
+    
+    }
+
+    func callRequest(searText: String, start: Int, sort: ProductSort) {
+        NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
             print("viewdidload",response!)
             guard let response else { return }
             self.shoppingList.items.append(contentsOf: response.items)
@@ -114,6 +115,27 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
+
+extension SearchViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        // 응답 메세지로 page에 대한 값이 정해져 있다면 조건을 추가해준다.
+        // 또한 마지막 페이지가 나오면 더이상 page를 증가시키지 않는다.
+        for indexPath in indexPaths {
+            
+            if shoppingList.items.count - 1 == indexPath.item {
+                start += 1
+                print("이거 왜?")
+                guard let searText else { return }
+                callRequest(searText: searText, start: start, sort: .sim)
+            }
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        
+    }
+}
+// MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print("search 취소버튼 눌림")
@@ -122,6 +144,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("리턴 버튼 눌림")
     }
+    
 }
 
 
@@ -146,5 +169,20 @@ extension SearchViewController {
         numberFormatter.numberStyle = .decimal
         let result = numberFormatter.string(for: Int(price))
         return result ?? ""
+    }
+    
+    // 네비게이션 영역 색상 설정
+    func setNavigation() {
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = .black
+        
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.standardAppearance = appearance
+       
+        navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .white
+        title = "쇼핑 검색"
     }
 }

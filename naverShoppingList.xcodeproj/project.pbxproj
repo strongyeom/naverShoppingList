@@ -113,7 +113,6 @@
 		26F617B32AAA15FD002061C4 /* naverShoppingList */ = {
 			isa = PBXGroup;
 			children = (
-				263A75B92AAB0AA3008294F8 /* DetailWeb */,
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
 				263A75B32AAAF4BF008294F8 /* Ext */,
@@ -125,6 +124,7 @@
 				26F617D02AAA198C002061C4 /* TabBar */,
 				26F617CF2AAA1989002061C4 /* ListVC */,
 				26F617CE2AAA1987002061C4 /* SearchVC */,
+				263A75B92AAB0AA3008294F8 /* DetailWeb */,
 				26F617BD2AAA1602002061C4 /* Assets.xcassets */,
 				26F617BF2AAA1602002061C4 /* LaunchScreen.storyboard */,
 				26F617C22AAA1602002061C4 /* Info.plist */,
