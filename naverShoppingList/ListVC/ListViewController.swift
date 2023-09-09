@@ -83,10 +83,6 @@ extension ListViewController: UICollectionViewDataSource {
         print("검색VC에서 좋아요 취소 \(sender.tag)")
         let selectedCell = likedShoppingList[sender.tag]
         
-        if selectedCell.isLike {
-        }
-        
-        
         realmRepository.deleData(item: selectedCell)
         
         self.listCollectionView.reloadData()

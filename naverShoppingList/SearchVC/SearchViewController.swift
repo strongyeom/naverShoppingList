@@ -148,6 +148,7 @@ extension SearchViewController: UICollectionViewDataSource {
         sender.isSelected.toggle()
         print("버튼 선택에 따른 상태 : \(sender.isSelected)")
         
+        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
         // 해당 버튼을 눌렀을때 해당 Cell의 정보를 어떻게 가져오지?
         let tagToShoppingList = shoppingList.items[sender.tag]
 

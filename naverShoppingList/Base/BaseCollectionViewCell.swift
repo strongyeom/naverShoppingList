@@ -105,7 +105,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         }
     }
     
-    // Search에서 부를때 
+    // Search VC에서 부를때
     func settupCell(item: Item) {
         let url = URL(string: item.image)!
         self.shoppingImage.kf.setImage(with: url)
@@ -114,12 +114,14 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
     }
     
+    // Like VC에서 부를 때
     func likedSettupCell(item: LocalRealmDB) {
         let url = URL(string: item.imageurl)!
         self.shoppingImage.kf.setImage(with: url)
         self.malNameLabel.text = item.malName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
+        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
         
 
