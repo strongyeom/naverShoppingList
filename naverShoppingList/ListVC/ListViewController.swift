@@ -10,8 +10,8 @@ import RealmSwift
 import SnapKit
 
 class ListViewController: UIViewController {
-
-    let realm = try! Realm()
+    
+    let realmRepository = RealmRepository()
     
     var likedShoppingList: Results<LocalRealmDB>!
     
@@ -30,9 +30,8 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-      // realm에서 데이터 불러오기
-        likedShoppingList = realm.objects(LocalRealmDB.self)
-       
+      
+        likedShoppingList = realmRepository.fetch()
         configureView()
         setConstraints()
     }
@@ -81,14 +80,15 @@ extension ListViewController: UICollectionViewDataSource {
     }
     
     @objc func cancelLikeBtnClicked(_ sender: UIButton) {
-        print("좋아요 검색창에서 좋아요 취소")
+        print("검색VC에서 좋아요 취소 \(sender.tag)")
         let selectedCell = likedShoppingList[sender.tag]
         
         if selectedCell.isLike {
-            try! realm.write {
-                realm.delete(selectedCell)
-            }
         }
+        
+        
+        realmRepository.deleData(item: selectedCell)
+        
         self.listCollectionView.reloadData()
     }
     

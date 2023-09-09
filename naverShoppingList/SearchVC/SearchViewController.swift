@@ -12,7 +12,7 @@ import RealmSwift
 
 class SearchViewController: UIViewController {
     
-    let realm = try! Realm()
+    let realmRepository = RealmRepository()
     
     var shoppingList = NaverShopping(total: 0, start: 0, display: 0, items: [])
     
@@ -42,7 +42,7 @@ class SearchViewController: UIViewController {
         settup()
         setNavigation()
         
-        print(realm.configuration.fileURL!)
+        print(realmRepository.realm.configuration.fileURL!)
         
     }
     
@@ -55,7 +55,6 @@ class SearchViewController: UIViewController {
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
-        //  callRequest(searText: "캠핑카", start: start, sort: .sim)
         
     }
     
@@ -151,21 +150,8 @@ extension SearchViewController: UICollectionViewDataSource {
         
         // 해당 버튼을 눌렀을때 해당 Cell의 정보를 어떻게 가져오지?
         let tagToShoppingList = shoppingList.items[sender.tag]
-        
-        let task = LocalRealmDB(
-            id: Int(tagToShoppingList.productID)!, imageurl: tagToShoppingList.image,
-            malName: tagToShoppingList.mallName,
-            title: tagToShoppingList.title.encodingText(), price: tagToShoppingList.lprice.numberToThreeCommaString(), isLike: sender.isSelected)
-        
-        // realm에 저장
-        do {
-            try realm.write {
-                realm.add(task)
-            }
-        } catch {
-            print(error)
-        }
-        
+
+        realmRepository.creatItem(item: tagToShoppingList, sender: sender)
         
     }
 }
