@@ -12,7 +12,9 @@
 		263A75B52AAAF4CB008294F8 /* Ext+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75B42AAAF4CB008294F8 /* Ext+UIButton.swift */; };
 		263A75B82AAAFC79008294F8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 263A75B72AAAFC79008294F8 /* Kingfisher */; };
 		263A75BB2AAB0AC9008294F8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75BA2AAB0AC9008294F8 /* DetailViewController.swift */; };
-		263A75C02AAB0CF5008294F8 /* Ext+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75BF2AAB0CF5008294F8 /* Ext+UIViewController.swift */; };
+		263A75C02AAB0CF5008294F8 /* Ext+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75BF2AAB0CF5008294F8 /* Ext+String.swift */; };
+		263A75F62AAC51B0008294F8 /* Ext+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75F52AAC51B0008294F8 /* Ext+UIViewController.swift */; };
+		263A75F82AAC5A56008294F8 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75F72AAC5A56008294F8 /* RealmRepository.swift */; };
 		26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B42AAA15FD002061C4 /* AppDelegate.swift */; };
 		26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B62AAA15FD002061C4 /* SceneDelegate.swift */; };
 		26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B82AAA15FD002061C4 /* SearchViewController.swift */; };
@@ -40,7 +42,9 @@
 		263A75B12AAAEB71008294F8 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		263A75B42AAAF4CB008294F8 /* Ext+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIButton.swift"; sourceTree = "<group>"; };
 		263A75BA2AAB0AC9008294F8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		263A75BF2AAB0CF5008294F8 /* Ext+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIViewController.swift"; sourceTree = "<group>"; };
+		263A75BF2AAB0CF5008294F8 /* Ext+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+String.swift"; sourceTree = "<group>"; };
+		263A75F52AAC51B0008294F8 /* Ext+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ext+UIViewController.swift"; sourceTree = "<group>"; };
+		263A75F72AAC5A56008294F8 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		26F617B12AAA15FD002061C4 /* naverShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = naverShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F617B42AAA15FD002061C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26F617B62AAA15FD002061C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				263A75B42AAAF4CB008294F8 /* Ext+UIButton.swift */,
-				263A75BF2AAB0CF5008294F8 /* Ext+UIViewController.swift */,
+				263A75BF2AAB0CF5008294F8 /* Ext+String.swift */,
+				263A75F52AAC51B0008294F8 /* Ext+UIViewController.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			children = (
 				26F617D22AAA1C27002061C4 /* NaverShopping.swift */,
 				26F617EA2AAA2DF3002061C4 /* RealmModel.swift */,
+				263A75F72AAC5A56008294F8 /* RealmRepository.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,14 +293,16 @@
 			files = (
 				26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */,
 				26F617F52AAA35B9002061C4 /* searchView.swift in Sources */,
+				263A75F62AAC51B0008294F8 /* Ext+UIViewController.swift in Sources */,
 				26F617FB2AAA3944002061C4 /* ReuseIentifier.swift in Sources */,
 				26F617CB2AAA16E9002061C4 /* TabBarController.swift in Sources */,
 				26F617F12AAA34BA002061C4 /* BaseViewController.swift in Sources */,
 				26F617D32AAA1C27002061C4 /* NaverShopping.swift in Sources */,
-				263A75C02AAB0CF5008294F8 /* Ext+UIViewController.swift in Sources */,
+				263A75C02AAB0CF5008294F8 /* Ext+String.swift in Sources */,
 				26F617EB2AAA2DF3002061C4 /* RealmModel.swift in Sources */,
 				26F617F32AAA3571002061C4 /* BaseCollectionViewCell.swift in Sources */,
 				26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */,
+				263A75F82AAC5A56008294F8 /* RealmRepository.swift in Sources */,
 				263A75BB2AAB0AC9008294F8 /* DetailViewController.swift in Sources */,
 				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
 				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,

@@ -45,7 +45,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         view.backgroundColor = .green
         return view
     }()
-    
+
     let likeButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -68,6 +68,8 @@ class BaseCollectionViewCell : UICollectionViewCell {
         
         configureView()
         setConstraints()
+    
+        
     }
     
     required init?(coder: NSCoder) {
@@ -102,15 +104,36 @@ class BaseCollectionViewCell : UICollectionViewCell {
             
         }
     }
+    
+    // Search에서 부를때 
+    func settupCell(item: Item) {
+        let url = URL(string: item.image)!
+        self.shoppingImage.kf.setImage(with: url)
+        self.malNameLabel.text = item.mallName
+        self.productName.text = item.title.encodingText()
+        self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
+    }
+    
+    func likedSettupCell(item: LocalRealmDB) {
+        let url = URL(string: item.imageurl)!
+        self.shoppingImage.kf.setImage(with: url)
+        self.malNameLabel.text = item.malName
+        self.productName.text = item.title.encodingText()
+        self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
+    }
         
-        func sethugging() {
-            productName.setContentHuggingPriority(.defaultHigh, for: .vertical)
-            malNameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
-            priceLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
-        }
+
     
     override func prepareForReuse() {
         super.prepareForReuse()
         shoppingImage.image = nil
+    }
+}
+
+extension BaseCollectionViewCell {
+    func sethugging() {
+        productName.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        malNameLabel.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        priceLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
 }

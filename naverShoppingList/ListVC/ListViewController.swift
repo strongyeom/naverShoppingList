@@ -6,13 +6,106 @@
 //
 
 import UIKit
+import RealmSwift
+import SnapKit
 
 class ListViewController: UIViewController {
 
+    let realm = try! Realm()
+    
+    var likedShoppingList: Results<LocalRealmDB>!
+    
+    lazy var listCollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
+        view.delegate = self
+        view.dataSource = self
+        view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
+        return view
+    }()
+    
+    let searchView =  SearchView()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        
+        view.backgroundColor = .white
+      // realm에서 데이터 불러오기
+        likedShoppingList = realm.objects(LocalRealmDB.self)
+       
+        configureView()
+        setConstraints()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("ListViewController - viewWillAppear")
+        print("Realm에 저장된 데이터들 : \(likedShoppingList)")
+        self.listCollectionView.reloadData()
+    }
+    
+    func configureView() {
+        view.addSubview(listCollectionView)
+        view.addSubview(searchView)
+    }
+    
+    func setConstraints() {
+        searchView.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        listCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchView.snp.bottom)
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+}
+
+extension ListViewController: UICollectionViewDelegate {
+    
+}
+
+extension ListViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return likedShoppingList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
+        let item = likedShoppingList[indexPath.item]
+        cell.likedSettupCell(item: item)
+        cell.likeButton.tag = indexPath.item
+        cell.likeButton.addTarget(self, action: #selector(cancelLikeBtnClicked(_:)), for: .touchUpInside)
+        return cell
+    }
+    
+    @objc func cancelLikeBtnClicked(_ sender: UIButton) {
+        print("좋아요 검색창에서 좋아요 취소")
+        let selectedCell = likedShoppingList[sender.tag]
+        
+        if selectedCell.isLike {
+            try! realm.write {
+                realm.delete(selectedCell)
+            }
+        }
+        self.listCollectionView.reloadData()
+    }
+    
+}
+
+
+extension ListViewController {
+    func settingCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let spacing: CGFloat = 10
+        let width = UIScreen.main.bounds.width - (spacing * 3)
+        layout.itemSize = CGSize(width: width / 2, height: width / 1.4)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        return layout
+        
+    }
 }

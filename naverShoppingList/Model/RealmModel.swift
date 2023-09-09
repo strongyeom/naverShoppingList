@@ -8,22 +8,22 @@
 import Foundation
 import RealmSwift
 
-class RealmModel: Object {
+class LocalRealmDB: Object {
     
     @Persisted var id: Int
     @Persisted var imageurl: String
-    @Persisted var malName: String?
+    @Persisted var malName: String
     @Persisted var title: String
-    @Persisted var price: Int
-    @Persisted var like: Bool
+    @Persisted var price: String
+    @Persisted var isLike: Bool
     
-    convenience init(id: Int, imageurl: String, malName: String? = nil, title: String, price: Int) {
+    convenience init(id: Int, imageurl: String, malName: String, title: String, price: String, isLike: Bool) {
         self.init()
         self.id = id
         self.imageurl = imageurl
         self.malName = malName
         self.title = title
         self.price = price
-        self.like = false
+        self.isLike = isLike
     }
 }

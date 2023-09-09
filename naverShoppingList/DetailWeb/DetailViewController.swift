@@ -28,7 +28,7 @@ class DetailViewController: UIViewController {
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
  
-        navigationItem.title = encodingText(text: detailProduct.title)
+        navigationItem.title = detailProduct.title.encodingText()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likeBtnClicked(_:)))
 
     }
@@ -49,3 +49,5 @@ class DetailViewController: UIViewController {
 extension DetailViewController: WKUIDelegate, UINavigationControllerDelegate {
     
 }
+
+
