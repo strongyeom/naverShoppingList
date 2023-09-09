@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 import SnapKit
 
+
 class ListViewController: UIViewController {
     
     let realmRepository = RealmRepository()
@@ -25,8 +26,6 @@ class ListViewController: UIViewController {
     
     let searchView =  SearchView()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -39,7 +38,7 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("ListViewController - viewWillAppear")
-        print("Realm에 저장된 데이터들 : \(likedShoppingList)")
+        print("Realm에 저장된 데이터들 List: \(likedShoppingList)")
         self.listCollectionView.reloadData()
     }
     
@@ -81,27 +80,12 @@ extension ListViewController: UICollectionViewDataSource {
     
     @objc func cancelLikeBtnClicked(_ sender: UIButton) {
         print("검색VC에서 좋아요 취소 \(sender.tag)")
+        sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        
         let selectedCell = likedShoppingList[sender.tag]
-        
+       
         realmRepository.deleData(item: selectedCell)
-        
         self.listCollectionView.reloadData()
     }
     
-}
-
-
-extension ListViewController {
-    func settingCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let spacing: CGFloat = 10
-        let width = UIScreen.main.bounds.width - (spacing * 3)
-        layout.itemSize = CGSize(width: width / 2, height: width / 1.4)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        return layout
-        
-    }
 }

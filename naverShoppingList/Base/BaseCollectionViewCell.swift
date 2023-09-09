@@ -63,12 +63,19 @@ class BaseCollectionViewCell : UICollectionViewCell {
         return stack
     }()
     
+    var exampleButton: Bool = false {
+        didSet {
+            likeButton.isSelected = exampleButton
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureView()
         setConstraints()
-    
+        
+        likeButton.isSelected ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         
     }
     
@@ -112,6 +119,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
+        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     
     // Like VC에서 부를 때
@@ -130,6 +138,8 @@ class BaseCollectionViewCell : UICollectionViewCell {
         super.prepareForReuse()
         shoppingImage.image = nil
     }
+    
+
 }
 
 extension BaseCollectionViewCell {

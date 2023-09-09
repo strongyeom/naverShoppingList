@@ -13,7 +13,7 @@ class RealmRepository {
     let realm = try! Realm()
     
     // 데이터 저장하기
-    func creatItem(item: Item, sender: UIButton) {
+    func creatItem(item: Item) {
         
         let task = LocalRealmDB(
             id: Int(item.productID)!,
@@ -21,7 +21,8 @@ class RealmRepository {
             malName: item.mallName,
             title: item.title.encodingText(),
             price: item.lprice.numberToThreeCommaString(),
-            isLike: sender.isSelected)
+            isLike: item.isLike
+        )
         
         do {
             try realm.write {

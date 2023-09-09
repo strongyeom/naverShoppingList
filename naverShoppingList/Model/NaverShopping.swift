@@ -18,7 +18,8 @@ struct Item: Codable {
     let title: String
     let image: String
     let lprice, mallName, productID: String
-
+    var isLike: Bool = false
+    
     enum CodingKeys: String, CodingKey {
         case title, image, lprice, mallName
         case productID = "productId"

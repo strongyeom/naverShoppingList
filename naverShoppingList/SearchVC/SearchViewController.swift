@@ -14,6 +14,10 @@ class SearchViewController: UIViewController {
     
     let realmRepository = RealmRepository()
     
+    var likedShoppingList: Results<LocalRealmDB>!
+    
+   // let list = ListViewController()
+    
     var shoppingList = NaverShopping(total: 0, start: 0, display: 0, items: [])
     
     lazy var searchCollectionView = {
@@ -44,6 +48,7 @@ class SearchViewController: UIViewController {
         
         print(realmRepository.realm.configuration.fileURL!)
         
+       
     }
     
     func settup() {
@@ -56,6 +61,14 @@ class SearchViewController: UIViewController {
         view.addSubview(searchView)
         view.addSubview(categortView)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        likedShoppingList = realmRepository.fetch()
+        print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
+        self.searchCollectionView.reloadData()
     }
     
     func callRequest(searText: String, start: Int, sort: ProductSort) {
@@ -114,13 +127,10 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-                let selectedCell = shoppingList.items[indexPath.item]
-                let vc = DetailViewController()
-                vc.detailProduct = selectedCell
-                navigationController?.pushViewController(vc, animated: true)
-        
-        
-        
+        let selectedCell = shoppingList.items[indexPath.item]
+        let vc = DetailViewController()
+        vc.detailProduct = selectedCell
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -132,11 +142,28 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
-        
-        let data = shoppingList.items[indexPath.item]
-        cell.settupCell(item: data)
+       
         cell.likeButton.tag = indexPath.item
+        for i in likedShoppingList {
+            if shoppingList.items[indexPath.item].productID.contains(String(i.id)) {
+                print("같은 ID 입니다. \(shoppingList.items[indexPath.item].productID), \(indexPath.item)")
+                if cell.likeButton.tag == indexPath.item {
+                    // 해당 tag의 버튼의 isSelected를 true로 바꿔라
+                    shoppingList.items[indexPath.item].isLike = true
+                    cell.likeButton.isSelected = true
+                    print("\(shoppingList.items)")
+                }
+            }
+        }
+       
+        let data = shoppingList.items[indexPath.item]
+        
+        cell.settupCell(item: data)
+        
         print("버튼 Tag: \(cell.likeButton.tag)")
+        
+
+        
         cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
         return cell
     }
@@ -144,15 +171,23 @@ extension SearchViewController: UICollectionViewDataSource {
     
     // MARK: - Like 버튼 액션
     @objc func likeBtnClicked(_ sender: UIButton) {
+//        list.completionHandler = {
+//            self.shoppingList.items[sender.tag].isLike = false
+//        }
         print("좋아요 버튼 눌림 \(sender.tag)")
         sender.isSelected.toggle()
-        print("버튼 선택에 따른 상태 : \(sender.isSelected)")
+       
+        shoppingList.items[sender.tag].isLike = sender.isSelected
+        print("버튼 선택에 따른 상태 : \(sender.isSelected), \(shoppingList.items)")
         
         sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
         // 해당 버튼을 눌렀을때 해당 Cell의 정보를 어떻게 가져오지?
         let tagToShoppingList = shoppingList.items[sender.tag]
-
-        realmRepository.creatItem(item: tagToShoppingList, sender: sender)
+        
+        if tagToShoppingList.isLike == true {
+            realmRepository.creatItem(item: tagToShoppingList)
+        }
+       
         
     }
 }
@@ -176,19 +211,3 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
 }
-
-extension SearchViewController {
-    func settingCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let spacing: CGFloat = 10
-        let width = UIScreen.main.bounds.width - (spacing * 3)
-        layout.itemSize = CGSize(width: width / 2, height: width / 1.4)
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        return layout
-        
-    }
-}
-

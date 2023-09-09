@@ -20,7 +20,7 @@ class NetwokeManager {
         guard let searText else { return }
         let text : String = searText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sort.rawValue)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=10&start=\(start)&sort=\(sort.rawValue)"
         
         //var components = URLComponents(string: "https://openapi.naver.com/v1/search/shop.json?")!
 
