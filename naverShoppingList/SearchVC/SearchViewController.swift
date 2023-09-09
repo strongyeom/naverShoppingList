@@ -29,16 +29,16 @@ class SearchViewController: UIViewController {
     var start = 1
     var sort: ProductSort = .sim
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         setConstraints()
         settup()
         setNavigation()
-
         
-       
+        
+        
     }
     
     func settup() {
@@ -50,10 +50,10 @@ class SearchViewController: UIViewController {
         view.addSubview(searchCollectionView)
         view.addSubview(searView)
         view.addSubview(categortView)
-      //  callRequest(searText: "캠핑카", start: start, sort: .sim)
-    
+        //  callRequest(searText: "캠핑카", start: start, sort: .sim)
+        
     }
-
+    
     func callRequest(searText: String, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
             print("viewdidload",response!)
@@ -62,7 +62,7 @@ class SearchViewController: UIViewController {
             self.searchCollectionView.reloadData()
         }
     }
-
+    
     func setConstraints() {
         
         searView.snp.makeConstraints { make in
@@ -84,7 +84,7 @@ class SearchViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-
+    
 }
 
 // MARK: - UICollectionViewDataSourcePrefetching
@@ -108,11 +108,11 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let selectedCell = shoppingList.items[indexPath.item]
-//        let vc = DetailViewController()
-//        vc.detailProduct = selectedCell
-//        navigationController?.pushViewController(vc, animated: true)
-//
+        //        let selectedCell = shoppingList.items[indexPath.item]
+        //        let vc = DetailViewController()
+        //        vc.detailProduct = selectedCell
+        //        navigationController?.pushViewController(vc, animated: true)
+        //
         
         
     }
@@ -130,13 +130,13 @@ extension SearchViewController: UICollectionViewDataSource {
         let url = URL(string: data.image)!
         cell.shoppingImage.kf.setImage(with: url)
         
-       
+        
         cell.malNameLabel.text = data.mallName
         cell.productName.text = encodingText(text: data.title)
         cell.priceLabel.text =  "\(example(price: data.lprice))원"
         cell.likeButton.tag = indexPath.item
         print("\(cell.likeButton.tag)")
-        cell.likeButton.addTarget(self, action: #selector(likeBtnClicked(_:)), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
         return cell
     }
     
@@ -144,8 +144,6 @@ extension SearchViewController: UICollectionViewDataSource {
         print("좋아요 버튼 눌림 \(sender.tag)")
     }
 }
-
-
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
@@ -197,7 +195,7 @@ extension SearchViewController {
         
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.standardAppearance = appearance
-       
+        
         navigationController?.navigationBar.standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.backButtonTitle = ""

@@ -15,6 +15,8 @@ class BaseCollectionViewCell : UICollectionViewCell {
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
         view.backgroundColor = .green
+        // 이미지 뷰에서 버튼 클릭이 가능하게 하려면 isUserInteractionEnabled 해야함 왜냐하면 기본값으로 false로 되어 있음
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -61,7 +63,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         return stack
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -79,7 +80,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         shoppingImage.addSubview(likeButton)
         sethugging()
     }
-    
+
     func setConstraints() {
         shoppingImage.backgroundColor = .red
         shoppingImage.snp.makeConstraints { make in
