@@ -71,9 +71,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         
         configureView()
         setConstraints()
-        
-        likeButton.isSelected ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -85,22 +82,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         contentView.addSubview(stackView)
         shoppingImage.addSubview(likeButton)
         sethugging()
-        likeButton.addTarget(self, action: #selector(likeBtnClicked(_:)), for: .touchUpInside)
     }
-    
-    @objc func likeBtnClicked(_ sender: UIButton) {
-        sender.isSelected.toggle()
-        
-        print("좋아요 버튼이 눌렸다 \(sender.isSelected)")
-        
-        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
-        
-        
-        if sender.isSelected == true {
-            
-        }
-    }
-
     func setConstraints() {
         shoppingImage.backgroundColor = .red
         shoppingImage.snp.makeConstraints { make in
@@ -130,7 +112,8 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
-       // item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        print("item.isLike : \(item.isLike)")
+        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
 
     // Like VC에서 부를 때
@@ -140,7 +123,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.malName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
-       // item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
     
     

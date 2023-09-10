@@ -74,19 +74,19 @@ extension ListViewController: UICollectionViewDataSource {
         let item = likedShoppingList[indexPath.item]
         cell.likedSettupCell(item: item)
         cell.likeButton.tag = indexPath.item
-       // cell.likeButton.addTarget(self, action: #selector(cancelLikeBtnClicked(_:)), for: .touchUpInside)
+        cell.likeButton.addTarget(self, action: #selector(cancelLikeBtnClicked(_:)), for: .touchUpInside)
         return cell
     }
     
-//    @objc func cancelLikeBtnClicked(_ sender: UIButton) {
-//        print("검색VC에서 좋아요 취소 \(sender.tag)")
-//        sender.setImage(UIImage(systemName: "heart"), for: .normal)
-//        
-//        let selectedCell = likedShoppingList[sender.tag]
-//        
-//        realmRepository.deleData(item: selectedCell)
-//        print("취소 버튼 눌림 , Realm에 저장된 데이터들 List: \(likedShoppingList)")
-//        self.listCollectionView.reloadData()
-//    }
+    @objc func cancelLikeBtnClicked(_ sender: UIButton) {
+        print("검색VC에서 좋아요 취소 \(sender.tag)")
+        sender.setImage(UIImage(systemName: "heart"), for: .normal)
+
+        let selectedCell = likedShoppingList[sender.tag]
+
+        realmRepository.deleData(item: selectedCell)
+        print("취소 버튼 눌림 , Realm에 저장된 데이터들 List: \(likedShoppingList)")
+        self.listCollectionView.reloadData()
+    }
     
 }
