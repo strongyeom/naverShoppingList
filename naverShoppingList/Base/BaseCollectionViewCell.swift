@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class BaseCollectionViewCell : UICollectionViewCell {
+    
+    let realmRepository = RealmRepository()
     
     let shoppingImage = {
         let view = UIImageView()
@@ -63,12 +66,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         return stack
     }()
     
-    var exampleButton: Bool = false {
-        didSet {
-            likeButton.isSelected = exampleButton
-        }
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -88,6 +85,20 @@ class BaseCollectionViewCell : UICollectionViewCell {
         contentView.addSubview(stackView)
         shoppingImage.addSubview(likeButton)
         sethugging()
+        likeButton.addTarget(self, action: #selector(likeBtnClicked(_:)), for: .touchUpInside)
+    }
+    
+    @objc func likeBtnClicked(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        
+        print("좋아요 버튼이 눌렸다 \(sender.isSelected)")
+        
+        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
+        
+        
+        if sender.isSelected == true {
+            
+        }
     }
 
     func setConstraints() {
@@ -119,9 +130,9 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
-        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+       // item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
-    
+
     // Like VC에서 부를 때
     func likedSettupCell(item: LocalRealmDB) {
         let url = URL(string: item.imageurl)!
@@ -129,17 +140,20 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.malName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
-        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+       // item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
+    
+    
+    
         
+    // 이렇게 생각해보자 버튼 클릭은 단순히 저장하고 삭제 기능만 하는데,
+    // true일때는 하트의 색상을 채워주고 저장, false일때는 빈 하트로 하고 realm delete하는 건 어때?
 
     
     override func prepareForReuse() {
         super.prepareForReuse()
         shoppingImage.image = nil
     }
-    
-
 }
 
 extension BaseCollectionViewCell {

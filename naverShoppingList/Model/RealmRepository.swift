@@ -23,7 +23,6 @@ class RealmRepository {
             price: item.lprice.numberToThreeCommaString(),
             isLike: item.isLike
         )
-        
         do {
             try realm.write {
                 realm.add(task)

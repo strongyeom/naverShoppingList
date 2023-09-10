@@ -16,8 +16,6 @@ class SearchViewController: UIViewController {
     
     var likedShoppingList: Results<LocalRealmDB>!
     
-   // let list = ListViewController()
-    
     var shoppingList = NaverShopping(total: 0, start: 0, display: 0, items: [])
     
     lazy var searchCollectionView = {
@@ -68,12 +66,11 @@ class SearchViewController: UIViewController {
         
         likedShoppingList = realmRepository.fetch()
         print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
-        self.searchCollectionView.reloadData()
     }
     
     func callRequest(searText: String, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
-            print("viewdidload",response!)
+           // print("viewdidload",response!)
             guard let response else { return }
             self.shoppingList.items.append(contentsOf: response.items)
             self.searchCollectionView.reloadData()
@@ -142,54 +139,53 @@ extension SearchViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
-       
+        
         cell.likeButton.tag = indexPath.item
         for i in likedShoppingList {
             if shoppingList.items[indexPath.item].productID.contains(String(i.id)) {
-                print("같은 ID 입니다. \(shoppingList.items[indexPath.item].productID), \(indexPath.item)")
-                if cell.likeButton.tag == indexPath.item {
-                    // 해당 tag의 버튼의 isSelected를 true로 바꿔라
+                print("같은 ID 입니다. \(shoppingList.items[indexPath.item].productID)")
+                
                     shoppingList.items[indexPath.item].isLike = true
                     cell.likeButton.isSelected = true
-                    print("\(shoppingList.items)")
-                }
+                  //  print("\(shoppingList.items)")
+                
             }
         }
+        // List에서 넘어온 ID를 CellforRowAt에서 비교해서 해당 isSelected = false로 설정
+
        
         let data = shoppingList.items[indexPath.item]
         
         cell.settupCell(item: data)
         
-        print("버튼 Tag: \(cell.likeButton.tag)")
-        
-
-        
-        cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
+     //   cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
         return cell
     }
     
     
     // MARK: - Like 버튼 액션
-    @objc func likeBtnClicked(_ sender: UIButton) {
-//        list.completionHandler = {
-//            self.shoppingList.items[sender.tag].isLike = false
+//    @objc func likeBtnClicked(_ sender: UIButton) {
+//
+//        print("좋아요 버튼 눌림 \(sender.tag)")
+//        sender.isSelected.toggle()
+//
+//        if shoppingList.items[sender.tag].isLike {
+//            shoppingList.items[sender.tag].isLike = false
+//        } else {
+//            shoppingList.items[sender.tag].isLike = true
 //        }
-        print("좋아요 버튼 눌림 \(sender.tag)")
-        sender.isSelected.toggle()
-       
-        shoppingList.items[sender.tag].isLike = sender.isSelected
-        print("버튼 선택에 따른 상태 : \(sender.isSelected), \(shoppingList.items)")
-        
-        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
-        // 해당 버튼을 눌렀을때 해당 Cell의 정보를 어떻게 가져오지?
-        let tagToShoppingList = shoppingList.items[sender.tag]
-        
-        if tagToShoppingList.isLike == true {
-            realmRepository.creatItem(item: tagToShoppingList)
-        }
-       
-        
-    }
+//
+//
+//        print("버튼 선택에 따른 상태 : \(sender.isSelected)")
+//
+//        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
+//        // 해당 버튼을 눌렀을때 해당 Cell의 정보를 어떻게 가져오지?
+//        let tagToShoppingList = shoppingList.items[sender.tag]
+//
+//        if tagToShoppingList.isLike == true {
+//            realmRepository.creatItem(item: tagToShoppingList)
+//        }
+//    }
 }
 
 // MARK: - UISearchBarDelegate
