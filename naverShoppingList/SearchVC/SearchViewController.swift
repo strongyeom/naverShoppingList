@@ -24,6 +24,8 @@ class SearchViewController: UIViewController {
         view.dataSource = self
         view.prefetchDataSource = self
         view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
+       // view.backgroundColor = .clear
+        view.backgroundColor = .black
         return view
     }()
     
@@ -42,8 +44,7 @@ class SearchViewController: UIViewController {
         configureView()
         setConstraints()
         settup()
-        setNavigation()
-        
+        setNavigation(inputTitle: "쇼핑 검색")
         print(realmRepository.realm.configuration.fileURL!)
         
        
@@ -54,7 +55,6 @@ class SearchViewController: UIViewController {
     }
     
     func configureView() {
-        view.backgroundColor = .white
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
@@ -196,7 +196,8 @@ extension SearchViewController: UICollectionViewDataSource {
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
         print("search 취소버튼 눌림")
         
     }
@@ -208,7 +209,7 @@ extension SearchViewController: UISearchBarDelegate {
             start = 1
             callRequest(searText: text, start: start, sort: .sim)
         }
-        view.endEditing(true)
+        searchBar.resignFirstResponder()
     }
     
 }

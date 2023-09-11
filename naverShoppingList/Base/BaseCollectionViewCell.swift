@@ -17,7 +17,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 12
         view.clipsToBounds = true
-        view.backgroundColor = .green
         // 이미지 뷰에서 버튼 클릭이 가능하게 하려면 isUserInteractionEnabled 해야함 왜냐하면 기본값으로 false로 되어 있음
         view.isUserInteractionEnabled = true
         return view
@@ -28,7 +27,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         view.text = "월드 캠핑카"
         view.font = .systemFont(ofSize: 12)
         view.textColor = .gray
-        view.backgroundColor = .green
         return view
     }()
     
@@ -37,7 +35,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
         view.text = "임시임시임시임시임시임시임시임시임시임시임시임시임시임시"
         view.font = .systemFont(ofSize: 13)
         view.numberOfLines = 2
-        view.backgroundColor = .green
         return view
     }()
     
@@ -45,15 +42,14 @@ class BaseCollectionViewCell : UICollectionViewCell {
         let view = UILabel()
         view.text = "20,000원20,000원20,000원20,000원"
         view.font = .systemFont(ofSize: 14, weight: .bold)
-        view.backgroundColor = .green
         return view
     }()
 
     let likeButton = {
         let view = UIButton()
         view.setImage(UIImage(systemName: "heart"), for: .normal)
-        view.backgroundColor = .red
         view.tintColor = .black
+        view.backgroundColor = .white
         return view
     }()
     
@@ -78,13 +74,11 @@ class BaseCollectionViewCell : UICollectionViewCell {
     }
     
     func configureView() {
-        self.backgroundColor = .yellow
         contentView.addSubview(stackView)
         shoppingImage.addSubview(likeButton)
         sethugging()
     }
     func setConstraints() {
-        shoppingImage.backgroundColor = .red
         shoppingImage.snp.makeConstraints { make in
             make.size.equalTo(self.frame.width).multipliedBy(1.0)
         }

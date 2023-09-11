@@ -24,7 +24,7 @@ extension UIViewController {
     }
 
     // 네비게이션 영역 색상 설정
-    func setNavigation() {
+    func setNavigation(inputTitle: String) {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .black
         
@@ -35,7 +35,7 @@ extension UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance?.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.tintColor = .white
-        title = "쇼핑 검색"
+       title = inputTitle
     }
 }
 

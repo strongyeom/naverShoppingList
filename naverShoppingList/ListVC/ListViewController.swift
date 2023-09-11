@@ -21,6 +21,7 @@ class ListViewController: UIViewController {
         view.delegate = self
         view.dataSource = self
         view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
+        view.backgroundColor = .black
         return view
     }()
     
@@ -28,11 +29,10 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-      
         likedShoppingList = realmRepository.fetch()
         configureView()
         setConstraints()
+        setNavigation(inputTitle: "좋아요 목록")
     }
 
     override func viewWillAppear(_ animated: Bool) {

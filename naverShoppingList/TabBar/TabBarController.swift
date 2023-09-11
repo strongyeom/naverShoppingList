@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
         let list = ListViewController()
         list.tabBarItem.title = "좋아요"
         list.tabBarItem.image = UIImage(systemName: "heart")
-        list.navigationItem.title = "좋아요 목록"
+       
         
         
 
