@@ -109,18 +109,40 @@ class BaseCollectionViewCell : UICollectionViewCell {
     
     // Search VC에서 부를때
     func settupCell(item: Item) {
+        
+        
         let url = URL(string: item.image)!
         self.shoppingImage.kf.setImage(with: url)
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
-       
+        
+        // Cell이 로드될때 realm의 ID에 있는 데이터와 데이터 통신으로 받아온 ID를 비교해서 같으면 하트 변경
         if realmRepository.fetch().contains(where: { $0.id == item.productID}) {
+            // ID가 같으면
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
+            // ID가 같지 않으면
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
         
+        // 버튼 액션 후 realm에 있는 ID와 선택한 Cell의 ID를 비교해서 realm에서 삭제, 추가 해줌 / 하트 변경
+        self.completionHandler = { [weak self] in
+            guard let self else { return }
+            if realmRepository.fetch().contains(where: {
+                String($0.id) == item.productID
+            }) {
+                // 포함되어 있으면
+                realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: item)
+                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            } else {
+                // 포함되어 있지 않다면
+                realmRepository.creatItem(item: item)
+                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
+        }
+        
+
         
     }
 
@@ -137,15 +159,13 @@ class BaseCollectionViewCell : UICollectionViewCell {
         } else {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-    }
-    
-    
-    
         
-    // 이렇게 생각해보자 버튼 클릭은 단순히 저장하고 삭제 기능만 하는데,
-    // true일때는 하트의 색상을 채워주고 저장, false일때는 빈 하트로 하고 realm delete하는 건 어때?
+        self.completionHandler = { [weak self] in
+            guard let self else { return }
+            realmRepository.deleData(item: realmRepository.fetch(), realmIndex: item)
+        }
+    }
 
-    
     override func prepareForReuse() {
         super.prepareForReuse()
         shoppingImage.image = nil

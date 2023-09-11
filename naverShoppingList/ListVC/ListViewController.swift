@@ -79,14 +79,10 @@ extension ListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
         let item = likedShoppingList[indexPath.item]
+        
+        
         cell.likedSettupCell(item: item)
-        cell.completionHandler = { [weak self] in
-            guard let self else { return }
-            
-            
-            realmRepository.deleData(item: realmRepository.fetch(), realmIndex: item)
-            self.listCollectionView.reloadData()
-        }
+        self.listCollectionView.reloadData()
         return cell
     }
 }
@@ -110,4 +106,6 @@ extension ListViewController : UISearchBarDelegate {
         self.listCollectionView.reloadData()
         
     }
+    
+    
 }

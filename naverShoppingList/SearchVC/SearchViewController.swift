@@ -154,16 +154,6 @@ extension SearchViewController: UICollectionViewDelegate {
         print("selectedCell : \(selectedCell)")
         let vc = DetailViewController()
         vc.detailProduct = selectedCell
-        
-//        let selectedCell = realmRepository.fetch()[indexPath.item]
-//        print("selectedCell : \(selectedCell)")
-//        let vc = DetailViewController()
-//        vc.detailProduct = selectedCell
-        
-        
-        
-        
-        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -180,20 +170,7 @@ extension SearchViewController: UICollectionViewDataSource {
         let data = shoppingList.items[indexPath.item]
         
         cell.settupCell(item: data)
-        cell.completionHandler = { [weak self] in
-            guard let self else { return }
-            if realmRepository.fetch().contains(where: {
-                String($0.id) == data.productID
-            }) {
-                realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: data)
-                cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            } else {
-                realmRepository.creatItem(item: data)
-                cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            }
-           
-            
-        }
+      
         return cell
     }
     

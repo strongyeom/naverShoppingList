@@ -16,6 +16,7 @@ class SearchView : BaseView {
         view.searchTextField.leftView?.tintColor = .white
         view.searchTextField.rightView?.tintColor = .white
         view.searchTextField.attributedPlaceholder = NSAttributedString(string: "검색어를 입력해주세요.", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        view.searchTextField.autocapitalizationType = .none
         view.setShowsCancelButton(true, animated: true)
         return view
     }()
