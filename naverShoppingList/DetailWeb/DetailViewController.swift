@@ -11,10 +11,11 @@ import RealmSwift
 
 class DetailViewController: UIViewController {
     
-    var likedRepository = RealmRepository()
+    var realmRepository = RealmRepository()
     
     var detailProduct: Item?
     
+    var likeButtonImage: UIImage?
     var webView: WKWebView = WKWebView()
 
     override func viewDidLoad() {
@@ -26,11 +27,21 @@ class DetailViewController: UIViewController {
     func configureView() {
         view.addSubview(webView)
         
+     
+        
         guard let detailProduct else { return }
+        
+        
+         if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID}) {
+             likeButtonImage =  UIImage(systemName: "heart.fill")
+         } else {
+             likeButtonImage = UIImage(systemName: "heart")
+         }
+        
         let myURL = URL(string:"https://msearch.shopping.naver.com/product/\(detailProduct.productID)")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
-        var likeButtonImage = detailProduct.isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
+        
         navigationItem.title = detailProduct.title.encodingText()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: likeButtonImage, style: .plain, target: self, action: #selector(likeBtnClicked(_:)))
         
@@ -41,7 +52,14 @@ class DetailViewController: UIViewController {
         guard let detailProduct else { return }
         // 좋아요 눌렸으면 하트 색상 바꿔져 있어야함
         
-       // likedRepository.deleData(item: detailProduct)
+        if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID }) {
+            realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: detailProduct)
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
+        } else {
+            realmRepository.creatItem(item: detailProduct)
+            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
+        }
+        
         
     }
     
