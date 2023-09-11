@@ -16,12 +16,11 @@ class RealmRepository {
     func creatItem(item: Item) {
         
         let task = LocalRealmDB(
-            id: Int(item.productID)!,
+            id: item.productID,
             imageurl: item.image,
             malName: item.mallName,
             title: item.title.encodingText(),
-            price: item.lprice.numberToThreeCommaString(),
-            isLike: item.isLike
+            price: item.lprice.numberToThreeCommaString()
         )
         do {
             try realm.write {
@@ -34,7 +33,7 @@ class RealmRepository {
     
     // 데이터 불러오기
     func fetch() -> Results<LocalRealmDB> {
-        let savedData = realm.objects(LocalRealmDB.self)
+        let savedData = realm.objects(LocalRealmDB.self).sorted(byKeyPath: "date", ascending: false)
         return savedData
     }
     
@@ -54,11 +53,26 @@ class RealmRepository {
         return result
     }
     
-    // 데이터 삭제하기
-    func deleData(item: LocalRealmDB) {
+    // Shopping 데이터 삭제하기
+    func deleData(item: Results<LocalRealmDB>, shoppingIndex: Item) {
         do {
+            
             try realm.write {
-                realm.delete(item)
+                let itemDelete = item.where{ $0.id == shoppingIndex.productID }
+                realm.delete(itemDelete)
+            }
+        } catch {
+            
+        }
+    }
+    
+    // RealMData 데이터 삭제하기
+    func deleData(item: Results<LocalRealmDB>, realmIndex: LocalRealmDB) {
+        do {
+            
+            try realm.write {
+                let itemDelete = item.where{ $0.id == realmIndex.id }
+                realm.delete(itemDelete)
             }
         } catch {
             

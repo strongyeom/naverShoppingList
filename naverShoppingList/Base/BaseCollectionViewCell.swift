@@ -47,7 +47,6 @@ class BaseCollectionViewCell : UICollectionViewCell {
 
     let likeButton = {
         let view = UIButton()
-        view.setImage(UIImage(systemName: "heart"), for: .normal)
         view.tintColor = .black
         view.backgroundColor = .white
         return view
@@ -62,11 +61,19 @@ class BaseCollectionViewCell : UICollectionViewCell {
         return stack
     }()
     
+    var completionHandler: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureView()
         setConstraints()
+        likeButton.addTarget(self, action: #selector(likeButtonClicked(_:)), for: .touchUpInside)
+    }
+    
+    @objc func likeButtonClicked(_ sender: UIButton) {
+        print("좋아요 버튼 눌림")
+        completionHandler?()
     }
     
     required init?(coder: NSCoder) {
@@ -98,6 +105,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
             
         }
     }
+
     
     // Search VC에서 부를때
     func settupCell(item: Item) {
@@ -106,8 +114,14 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
-       // print("item.isLike : \(item.isLike)")
-        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+       
+        if realmRepository.fetch().contains(where: { $0.id == item.productID}) {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
+        
     }
 
     // Like VC에서 부를 때
@@ -117,7 +131,12 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.malName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
-        item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        
+        if realmRepository.fetch().contains(where: { $0.id == item.id}) {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
     
     

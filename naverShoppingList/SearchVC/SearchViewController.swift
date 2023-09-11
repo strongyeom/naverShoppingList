@@ -177,54 +177,27 @@ extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.likeButton.tag = indexPath.item
-   
-        for i in likedShoppingList {
-            for j in 0..<shoppingList.items.count {
-                if shoppingList.items[j].productID == String(i.id) {
-                    cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                } else {
-                    cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                }
-            }
-        }
-        
-        
         let data = shoppingList.items[indexPath.item]
         
         cell.settupCell(item: data)
-        cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
-        print("버튼 true, false 상태 \(data.isLike), \(cell.likeButton.isSelected), realm 데이터 카운트 : \(likedShoppingList.count)")
+        cell.completionHandler = { [weak self] in
+            guard let self else { return }
+            if realmRepository.fetch().contains(where: {
+                String($0.id) == data.productID
+            }) {
+                realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: data)
+                cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            } else {
+                realmRepository.creatItem(item: data)
+                cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            }
+           
+            
+        }
         return cell
     }
     
-    // MARK: - Like 버튼 액션
-    @objc func likeBtnClicked(_ sender: UIButton) {
 
-        print("좋아요 버튼 눌림 \(sender.tag)")
-        sender.isSelected.toggle()
-        
-        var tagToShoppingList = shoppingList.items[sender.tag]
-        
-        
-        print("버튼 선택에 따른 상태 : \(sender.isSelected)")
-
-        if tagToShoppingList.isLike == sender.isSelected {
-            print("네트워크에서 설정한 isLike와 버튼 isSelcted가 같을때 ")
-            tagToShoppingList.isLike = false
-            
-        } else {
-            print("네트워크에서 설정한 isLike와 버튼 isSelcted가 다를때 ")
-            print("SearchVC Bool 값일때- \(tagToShoppingList.isLike) != \(sender.isSelected)")
-            tagToShoppingList.isLike = true
-            realmRepository.creatItem(item: tagToShoppingList)
-        }
-
-
-
-        sender.isSelected ? sender.setImage(UIImage(systemName: "heart.fill"), for: .normal) : sender.setImage(UIImage(systemName: "heart"), for: .normal)
-
-    }
 }
 
 // MARK: - UISearchBarDelegate
