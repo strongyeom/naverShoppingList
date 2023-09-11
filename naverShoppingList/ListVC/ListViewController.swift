@@ -45,6 +45,7 @@ class ListViewController: UIViewController {
     func configureView() {
         view.addSubview(listCollectionView)
         view.addSubview(searchView)
+        searchView.searchBar.delegate = self
     }
     
     func setConstraints() {
@@ -61,7 +62,15 @@ class ListViewController: UIViewController {
 }
 
 extension ListViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCell = likedShoppingList[indexPath.item]
+        let vc = DetailViewController()
+        
+        let task = Item(title: selectedCell.title, image: selectedCell.imageurl, lprice: selectedCell.price, mallName: selectedCell.malName, productID: String(selectedCell.id))
+        vc.detailProduct = task
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension ListViewController: UICollectionViewDataSource {
@@ -89,4 +98,25 @@ extension ListViewController: UICollectionViewDataSource {
         self.listCollectionView.reloadData()
     }
     
+}
+
+extension ListViewController : UISearchBarDelegate {
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        likedShoppingList = realmRepository.fetch()
+        self.listCollectionView.reloadData()
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("$56")
+        
+        if let text = searchBar.text {
+            likedShoppingList = realmRepository.fetchFilter(text: text)
+        }
+        self.listCollectionView.reloadData()
+        
+    }
 }

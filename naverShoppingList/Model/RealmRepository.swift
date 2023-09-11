@@ -38,6 +38,22 @@ class RealmRepository {
         return savedData
     }
     
+    // 데이터 필터하기
+    func fetchFilter(text: String) -> Results<LocalRealmDB> {
+        let result = realm.objects(LocalRealmDB.self).where {
+            // caseInsensitive : 대소문자 구별을 없애줌
+            // $0.diaryTitle.contains("제목", options: .caseInsensitive)
+            
+            // 2. Bool
+            // $0.diaryLike == true
+            
+            // 3. 사진이 있는 데이터만 불러오기 ( diaryPhoho의 nil 여부 판단 )
+            $0.title.contains(text, options: .caseInsensitive)
+         }
+        
+        return result
+    }
+    
     // 데이터 삭제하기
     func deleData(item: LocalRealmDB) {
         do {
@@ -48,5 +64,7 @@ class RealmRepository {
             
         }
     }
+    
+    
     
 }
