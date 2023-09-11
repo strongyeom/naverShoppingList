@@ -63,13 +63,13 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCell = likedShoppingList[indexPath.item]
-        let vc = DetailViewController()
+//        let selectedCell = likedShoppingList[indexPath.item]
+//        let vc = DetailViewController()
+//        
+//        let task = Item(title: selectedCell.title, image: selectedCell.imageurl, lprice: selectedCell.price, mallName: selectedCell.malName, productID: String(selectedCell.id), isLike: selectedCell.isLike)
+//        vc.detailProduct = task
         
-        let task = Item(title: selectedCell.title, image: selectedCell.imageurl, lprice: selectedCell.price, mallName: selectedCell.malName, productID: String(selectedCell.id))
-        vc.detailProduct = task
-        
-        navigationController?.pushViewController(vc, animated: true)
+       // navigationController?.pushViewController(vc, animated: true)
     }
 }
 

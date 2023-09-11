@@ -106,7 +106,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         self.malNameLabel.text = item.mallName
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
-        print("item.isLike : \(item.isLike)")
+       // print("item.isLike : \(item.isLike)")
         item.isLike ? likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal) : likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
     }
 

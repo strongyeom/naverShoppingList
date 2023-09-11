@@ -151,8 +151,19 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCell = shoppingList.items[indexPath.item]
+        print("selectedCell : \(selectedCell)")
         let vc = DetailViewController()
         vc.detailProduct = selectedCell
+        
+//        let selectedCell = realmRepository.fetch()[indexPath.item]
+//        print("selectedCell : \(selectedCell)")
+//        let vc = DetailViewController()
+//        vc.detailProduct = selectedCell
+        
+        
+        
+        
+        
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -167,23 +178,23 @@ extension SearchViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
         
         cell.likeButton.tag = indexPath.item
+   
         for i in likedShoppingList {
-            if shoppingList.items[indexPath.item].productID.contains(String(i.id)) {
-                print("같은 ID 입니다. \(shoppingList.items[indexPath.item].productID)")
-                
-                    shoppingList.items[indexPath.item].isLike = true
-                    cell.likeButton.isSelected = true
-                  //  print("\(shoppingList.items)")
-                
+            for j in 0..<shoppingList.items.count {
+                if shoppingList.items[j].productID == String(i.id) {
+                    cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                } else {
+                    cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                }
             }
         }
-        // List에서 넘어온 ID를 CellforRowAt에서 비교해서 해당 isSelected = false로 설정
-
-       
+        
+        
         let data = shoppingList.items[indexPath.item]
         
         cell.settupCell(item: data)
         cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
+        print("버튼 true, false 상태 \(data.isLike), \(cell.likeButton.isSelected), realm 데이터 카운트 : \(likedShoppingList.count)")
         return cell
     }
     
@@ -201,7 +212,6 @@ extension SearchViewController: UICollectionViewDataSource {
         if tagToShoppingList.isLike == sender.isSelected {
             print("네트워크에서 설정한 isLike와 버튼 isSelcted가 같을때 ")
             tagToShoppingList.isLike = false
-            print("likedShoppingList.count",likedShoppingList.count)
             
         } else {
             print("네트워크에서 설정한 isLike와 버튼 isSelcted가 다를때 ")

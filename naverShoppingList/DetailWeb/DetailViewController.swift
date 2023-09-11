@@ -7,8 +7,11 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 class DetailViewController: UIViewController {
+    
+    var likedRepository = RealmRepository()
     
     var detailProduct: Item?
     
@@ -27,15 +30,19 @@ class DetailViewController: UIViewController {
         let myURL = URL(string:"https://msearch.shopping.naver.com/product/\(detailProduct.productID)")
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
- 
+        var likeButtonImage = detailProduct.isLike ? UIImage(systemName: "heart.fill") : UIImage(systemName: "heart")
         navigationItem.title = detailProduct.title.encodingText()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(likeBtnClicked(_:)))
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: likeButtonImage, style: .plain, target: self, action: #selector(likeBtnClicked(_:)))
+        
     }
     
     @objc func likeBtnClicked(_ sender: UIBarButtonItem) {
         print("좋아요 버튼 ")
+        guard let detailProduct else { return }
         // 좋아요 눌렸으면 하트 색상 바꿔져 있어야함
+        
+       // likedRepository.deleData(item: detailProduct)
+        
     }
     
     func setConstraints() {
