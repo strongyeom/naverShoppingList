@@ -32,7 +32,8 @@ class SearchViewController: UIViewController {
     let searchView =  SearchView()
     let categortView = CategoryView()
     
-    
+    var BtnArray = [UIButton]()
+    var userInputText: String?
     var start = 1
     var sort: ProductSort = .sim
     
@@ -43,22 +44,46 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         setConstraints()
-        settup()
         setNavigation(inputTitle: "쇼핑 검색")
         print(realmRepository.realm.configuration.fileURL!)
         
        
     }
-    
-    func settup() {
-        searchView.searchBar.delegate = self
-    }
-    
+ 
     func configureView() {
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
-        
+        searchView.searchBar.delegate = self
+
+        [categortView.button1, categortView.button2, categortView.button3, categortView.button4].forEach {
+            BtnArray.append($0)
+            $0.addTarget(self, action: #selector(sortBtnClicked(_:)), for: .touchUpInside)
+        }
+    }
+    
+    @objc func sortBtnClicked(_ sender: UIButton) {
+        print("버튼이 눌렸다 \(sender.tag)")
+
+        self.shoppingList.items.removeAll()
+        let selectedSort: ProductSort = ProductSort.allCases[sender.tag]
+
+        for Btn in BtnArray {
+                 if Btn == sender {
+                     // 만약 현재 버튼이 이 함수를 호출한 버튼이라면
+                     sort = selectedSort
+                     Btn.isSelected = true
+                     Btn.setTitleColor(.black, for: .normal)
+                     Btn.backgroundColor = UIColor.white
+                 } else {
+                     // 이 함수를 호출한 버튼이 아니라면
+                     Btn.isSelected = false
+                     Btn.setTitleColor(.white, for: .normal)
+                     Btn.backgroundColor = .clear
+                 }
+             }
+       
+        callRequest(searText: userInputText, start: start, sort: sort)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,7 +94,7 @@ class SearchViewController: UIViewController {
         self.searchCollectionView.reloadData()
     }
     
-    func callRequest(searText: String, start: Int, sort: ProductSort) {
+    func callRequest(searText: String?, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
            // print("viewdidload",response!)
             guard let response else { return }
@@ -112,7 +137,7 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
             
             if shoppingList.items.count - 1 == indexPath.item {
                 start += 1
-                callRequest(searText: "캠핑카", start: start, sort: .sim)
+                callRequest(searText: userInputText, start: start, sort: sort)
             }
         }
     }
@@ -158,7 +183,6 @@ extension SearchViewController: UICollectionViewDataSource {
         let data = shoppingList.items[indexPath.item]
         
         cell.settupCell(item: data)
-        
         cell.likeButton.addTarget(self, action: #selector(likeBtnClicked), for: .touchUpInside)
         return cell
     }
@@ -204,11 +228,12 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("리턴 버튼 눌림")
-        if let text = searchBar.text {
+        
+            userInputText = searchBar.text
             self.shoppingList.items.removeAll()
             start = 1
-            callRequest(searText: text, start: start, sort: .sim)
-        }
+            callRequest(searText: userInputText, start: start, sort: sort)
+        
         searchBar.resignFirstResponder()
     }
     

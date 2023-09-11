@@ -13,6 +13,7 @@ class CategoryView : BaseView {
        let view = UIButton()
         view.setTitle("정확도", for: .normal)
         view.setBtnConfigure()
+        view.tag = 0
         return view
     }()
     
@@ -20,6 +21,7 @@ class CategoryView : BaseView {
        let view = UIButton()
         view.setTitle("날짜순", for: .normal)
         view.setBtnConfigure()
+        view.tag = 1
         return view
     }()
     
@@ -27,6 +29,7 @@ class CategoryView : BaseView {
        let view = UIButton()
         view.setTitle("가격높은순", for: .normal)
         view.setBtnConfigure()
+        view.tag = 2
         return view
     }()
     
@@ -34,6 +37,7 @@ class CategoryView : BaseView {
        let view = UIButton()
         view.setTitle("가격낮은순", for: .normal)
         view.setBtnConfigure()
+        view.tag = 3
         return view
     }()
     

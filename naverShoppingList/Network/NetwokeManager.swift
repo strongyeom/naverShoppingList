@@ -31,7 +31,7 @@ class NetwokeManager {
 //        let sort = URLQueryItem(name: "sort", value: sort.rawValue)
 //        components.queryItems = [query, display, start, sort]
 //        guard let url = components.url else { return }
-//        print("url",url)
+        print("url",url)
         
         let header: HTTPHeaders = [
             "X-Naver-Client-Id": "myXCWsXxrg83Q4L0SAdP",
