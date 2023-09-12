@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Kingfisher
 
 class BaseCollectionViewCell : UICollectionViewCell {
     
@@ -25,7 +26,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
     let malNameLabel = {
         let view = UILabel()
         view.text = "월드 캠핑카"
-        view.font = .systemFont(ofSize: 12)
+        view.font = .systemFont(ofSize: 13)
         view.textColor = .gray
         return view
     }()
@@ -48,6 +49,8 @@ class BaseCollectionViewCell : UICollectionViewCell {
     let likeButton = {
         let view = UIButton()
         view.tintColor = .black
+        view.isHidden = true
+        
         view.backgroundColor = .white
         return view
     }()
@@ -55,7 +58,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
     lazy var stackView = {
         let stack = UIStackView(arrangedSubviews: [shoppingImage, malNameLabel, productName, priceLabel])
         stack.axis = .vertical
-        stack.spacing = 1
+        stack.spacing = 3
         stack.alignment = .leading
         stack.distribution = .fill
         return stack
@@ -100,9 +103,9 @@ class BaseCollectionViewCell : UICollectionViewCell {
         }
         
         DispatchQueue.main.async {
+            self.likeButton.isHidden = false
             self.likeButton.layer.cornerRadius = self.likeButton.frame.width / 2
             self.likeButton.clipsToBounds = true
-            
         }
     }
 
@@ -113,7 +116,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         
         let url = URL(string: item.image)!
         self.shoppingImage.kf.setImage(with: url)
-        self.malNameLabel.text = item.mallName
+        self.malNameLabel.text =  "[\(item.mallName)]"
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
         
@@ -141,16 +144,13 @@ class BaseCollectionViewCell : UICollectionViewCell {
                 self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             }
         }
-        
-
-        
     }
 
     // Like VC에서 부를 때
     func likedSettupCell(item: LocalRealmDB) {
         let url = URL(string: item.imageurl)!
         self.shoppingImage.kf.setImage(with: url)
-        self.malNameLabel.text = item.malName
+        self.malNameLabel.text = "[\(item.malName)]"
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
         
@@ -175,3 +175,5 @@ extension BaseCollectionViewCell {
         priceLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
     }
 }
+
+

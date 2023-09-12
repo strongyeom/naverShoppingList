@@ -35,6 +35,7 @@
 		26F617F52AAA35B9002061C4 /* searchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617F42AAA35B9002061C4 /* searchView.swift */; };
 		26F617F82AAA382D002061C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617F72AAA382D002061C4 /* SnapKit */; };
 		26F617FB2AAA3944002061C4 /* ReuseIentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */; };
+		26F935882AB0B41B005EAAC9 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F935872AB0B41B005EAAC9 /* ImageCacheManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		26F617F22AAA3571002061C4 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		26F617F42AAA35B9002061C4 /* searchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchView.swift; sourceTree = "<group>"; };
 		26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIentifier.swift; sourceTree = "<group>"; };
+		26F935872AB0B41B005EAAC9 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 		26F617B32AAA15FD002061C4 /* naverShoppingList */ = {
 			isa = PBXGroup;
 			children = (
+				26F935862AB0B3FF005EAAC9 /* Cache */,
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
 				263A75B32AAAF4BF008294F8 /* Ext */,
@@ -206,6 +209,14 @@
 				26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		26F935862AB0B3FF005EAAC9 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				26F935872AB0B41B005EAAC9 /* ImageCacheManager.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +322,7 @@
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
 				26F617D62AAA1D08002061C4 /* NetwokeManager.swift in Sources */,
 				263A75B02AAAEB22008294F8 /* CategoryView.swift in Sources */,
+				26F935882AB0B41B005EAAC9 /* ImageCacheManager.swift in Sources */,
 				263A75B22AAAEB71008294F8 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -106,7 +106,7 @@ extension ListViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("$56")
         
-        if let text = searchBar.text {
+        if let text = searchBar.text?.lowercased() {
             likedShoppingList = realmRepository.fetchFilter(text: text)
         }
         self.listCollectionView.reloadData()

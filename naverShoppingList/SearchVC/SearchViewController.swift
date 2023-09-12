@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import Kingfisher
 import RealmSwift
 
 class SearchViewController: UIViewController {
@@ -29,7 +28,11 @@ class SearchViewController: UIViewController {
         return view
     }()
     
-    let searchView =  SearchView()
+    lazy var searchView = {
+       let search =  SearchView()
+        search.searchBar.delegate = self
+        return search
+    }()
     let categortView = CategoryView()
     
     var BtnArray = [UIButton]()
@@ -45,17 +48,20 @@ class SearchViewController: UIViewController {
         configureView()
         setConstraints()
         setNavigation(inputTitle: "쇼핑 검색")
+        setCategoriesButton()
         print(realmRepository.realm.configuration.fileURL!)
         
-       
     }
  
     func configureView() {
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
-        searchView.searchBar.delegate = self
 
+        
+    }
+    
+    func setCategoriesButton() {
         [categortView.button1, categortView.button2, categortView.button3, categortView.button4].forEach {
             BtnArray.append($0)
             $0.addTarget(self, action: #selector(sortBtnClicked(_:)), for: .touchUpInside)
@@ -63,27 +69,31 @@ class SearchViewController: UIViewController {
     }
     
     @objc func sortBtnClicked(_ sender: UIButton) {
-        print("버튼이 눌렸다 \(sender.tag)")
+        
+        if shoppingList.items.count > 1 {
+            print("버튼이 눌렸다 \(sender.tag)")
 
-        self.shoppingList.items.removeAll()
-        let selectedSort: ProductSort = ProductSort.allCases[sender.tag]
+            self.shoppingList.items.removeAll()
+            let selectedSort: ProductSort = ProductSort.allCases[sender.tag]
 
-        for Btn in BtnArray {
-                 if Btn == sender {
-                     // 만약 현재 버튼이 이 함수를 호출한 버튼이라면
-                     sort = selectedSort
-                     Btn.isSelected = true
-                     Btn.setTitleColor(.black, for: .normal)
-                     Btn.backgroundColor = UIColor.white
-                 } else {
-                     // 이 함수를 호출한 버튼이 아니라면
-                     Btn.isSelected = false
-                     Btn.setTitleColor(.white, for: .normal)
-                     Btn.backgroundColor = .clear
+            for Btn in BtnArray {
+                     if Btn == sender {
+                         // 만약 현재 버튼이 이 함수를 호출한 버튼이라면
+                         sort = selectedSort
+                         Btn.isSelected = true
+                         Btn.setTitleColor(.black, for: .normal)
+                         Btn.backgroundColor = UIColor.white
+                     } else {
+                         // 이 함수를 호출한 버튼이 아니라면
+                         Btn.isSelected = false
+                         Btn.setTitleColor(.white, for: .normal)
+                         Btn.backgroundColor = .clear
+                     }
                  }
-             }
-       
-        callRequest(searText: userInputText, start: start, sort: sort)
+           
+            callRequest(searText: userInputText, start: start, sort: sort)
+        }
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -189,7 +199,7 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         print("리턴 버튼 눌림")
         
-            userInputText = searchBar.text
+        userInputText = searchBar.text?.lowercased()
             self.shoppingList.items.removeAll()
             start = 1
             callRequest(searText: userInputText, start: start, sort: sort)

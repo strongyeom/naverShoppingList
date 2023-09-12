@@ -40,13 +40,6 @@ class RealmRepository {
     // 데이터 필터하기
     func fetchFilter(text: String) -> Results<LocalRealmDB> {
         let result = realm.objects(LocalRealmDB.self).where {
-            // caseInsensitive : 대소문자 구별을 없애줌
-            // $0.diaryTitle.contains("제목", options: .caseInsensitive)
-            
-            // 2. Bool
-            // $0.diaryLike == true
-            
-            // 3. 사진이 있는 데이터만 불러오기 ( diaryPhoho의 nil 여부 판단 )
             $0.title.contains(text, options: .caseInsensitive)
          }
         
@@ -62,7 +55,7 @@ class RealmRepository {
                 realm.delete(itemDelete)
             }
         } catch {
-            
+            print("네트워크 통신에서 받아온 데이터를 삭제하지 못했습니다 : \(error.localizedDescription)")
         }
     }
     
@@ -75,7 +68,7 @@ class RealmRepository {
                 realm.delete(itemDelete)
             }
         } catch {
-            
+            print("Realm에 저장된 데이터를 삭제하지 못했습니다. : \(error.localizedDescription)")
         }
     }
     

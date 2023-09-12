@@ -14,23 +14,12 @@ class NetwokeManager {
     private init() { }
     
 
-
     
     func callRequest(searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (NaverShopping?) -> Void) {
         guard let searText else { return }
         let text : String = searText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=10&start=\(start)&sort=\(sort.rawValue)"
-        
-        //var components = URLComponents(string: "https://openapi.naver.com/v1/search/shop.json?")!
-
-//        let query = URLQueryItem(name: "query", value: text)
-//        let display = URLQueryItem(name: "display", value: "\(display)")
-//        let start = URLQueryItem(name: "start", value: "\(start)")
-//        print("sort.rawValue",sort.rawValue)
-//        let sort = URLQueryItem(name: "sort", value: sort.rawValue)
-//        components.queryItems = [query, display, start, sort]
-//        guard let url = components.url else { return }
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sort.rawValue)"
         print("url",url)
         
         let header: HTTPHeaders = [
@@ -44,7 +33,7 @@ class NetwokeManager {
                 case .success(let data):
                     completionHandler(data)
                 case .failure(let error):
-                    print(error)
+                    print(error.localizedDescription)
                 }
             }
     }
