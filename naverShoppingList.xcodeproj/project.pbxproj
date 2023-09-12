@@ -36,6 +36,7 @@
 		26F617F82AAA382D002061C4 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 26F617F72AAA382D002061C4 /* SnapKit */; };
 		26F617FB2AAA3944002061C4 /* ReuseIentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */; };
 		26F935882AB0B41B005EAAC9 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F935872AB0B41B005EAAC9 /* ImageCacheManager.swift */; };
+		26F9358C2AB0BD57005EAAC9 /* SearchViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F9358B2AB0BD57005EAAC9 /* SearchViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		26F617F42AAA35B9002061C4 /* searchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchView.swift; sourceTree = "<group>"; };
 		26F617FA2AAA3944002061C4 /* ReuseIentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIentifier.swift; sourceTree = "<group>"; };
 		26F935872AB0B41B005EAAC9 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		26F9358B2AB0BD57005EAAC9 /* SearchViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				26F617B82AAA15FD002061C4 /* SearchViewController.swift */,
+				26F9358B2AB0BD57005EAAC9 /* SearchViewViewModel.swift */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
 				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,
 				263A75B52AAAF4CB008294F8 /* Ext+UIButton.swift in Sources */,
+				26F9358C2AB0BD57005EAAC9 /* SearchViewViewModel.swift in Sources */,
 				26F617E42AAA2094002061C4 /* NetworkError.swift in Sources */,
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
 				26F617D62AAA1D08002061C4 /* NetwokeManager.swift in Sources */,

@@ -57,8 +57,6 @@ class SearchViewController: UIViewController {
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
-
-        
     }
     
     func setCategoriesButton() {
