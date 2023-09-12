@@ -10,8 +10,8 @@ import Foundation
 enum ProductSort: String, CaseIterable {
     case sim
     case date
-    case asc
     case dsc
+    case asc
 }
 
 

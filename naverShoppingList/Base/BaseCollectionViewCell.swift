@@ -159,11 +159,7 @@ class BaseCollectionViewCell : UICollectionViewCell {
         } else {
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
-        
-        self.completionHandler = { [weak self] in
-            guard let self else { return }
-            realmRepository.deleData(item: realmRepository.fetch(), realmIndex: item)
-        }
+
     }
 
     override func prepareForReuse() {

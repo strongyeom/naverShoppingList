@@ -67,6 +67,7 @@ extension ListViewController: UICollectionViewDelegate {
         let selectedItem = likedShoppingList[indexPath.item]
         let task = Item(title: selectedItem.title, image: selectedItem.imageurl, lprice: selectedItem.price, mallName: selectedItem.malName, productID: selectedItem.id)
         vc.detailProduct = task
+        print("ListVC - Cell 눌림 ")
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -82,7 +83,12 @@ extension ListViewController: UICollectionViewDataSource {
         
         
         cell.likedSettupCell(item: item)
-        self.listCollectionView.reloadData()
+        
+        cell.completionHandler = { [weak self] in
+            guard let self else { return }
+            self.realmRepository.deleData(item: realmRepository.fetch(), realmIndex: item)
+            self.listCollectionView.reloadData()
+        }
         return cell
     }
 }
