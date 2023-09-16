@@ -27,6 +27,7 @@ class NetwokeManager {
             "X-Naver-Client-Secret": "2s8Jgd07Ij"
         ]
         
+        // Alamofire에서 ErrorHandling을 하려면 어떻게 할까?
         AF.request(url, headers: header).validate(statusCode: 200...500)
             .responseDecodable(of: NaverShopping.self) { response in
                 switch response.result {

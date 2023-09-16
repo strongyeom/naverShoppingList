@@ -33,6 +33,7 @@ class SearchViewController: UIViewController {
         search.searchBar.delegate = self
         return search
     }()
+    
     let categortView = CategoryView()
     
     var BtnArray = [UIButton]()
