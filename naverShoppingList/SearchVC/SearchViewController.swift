@@ -45,13 +45,14 @@ class SearchViewController: UIViewController {
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
-        print(#function)
+        
         super.viewDidLoad()
         configureView()
         setConstraints()
         setNavigation(inputTitle: "쇼핑 검색")
         setCategoriesButton()
         print(realmRepository.realm.configuration.fileURL!)
+        print(#function)
         
     }
  
