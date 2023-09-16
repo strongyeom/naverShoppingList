@@ -45,6 +45,7 @@ class SearchViewController: UIViewController {
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
+        print(#function)
         super.viewDidLoad()
         configureView()
         setConstraints()
