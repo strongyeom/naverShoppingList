@@ -15,20 +15,10 @@ final class NetwokeManager {
     
 
     
-    func callRequest(searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (Result<NaverShopping, NaverAPIError>) -> Void) {
-        guard let searText else { return }
-        let text : String = searText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sort.rawValue)"
-        print("url",url)
-        
-        let header: HTTPHeaders = [
-            "X-Naver-Client-Id": "myXCWsXxrg83Q4L0SAdP",
-            "X-Naver-Client-Secret": "2s8Jgd07Ij"
-        ]
-        
+    func callRequest(api: NetworkAPI, searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (Result<NaverShopping, NaverAPIError>) -> Void) {
+
         // Alamofire에서 ErrorHandling을 하려면 어떻게 할까?
-        AF.request(url, headers: header).validate(statusCode: 200...500)
+        AF.request(api.endPoint, parameters: api.query, headers: api.header).validate(statusCode: 200...500)
             .responseDecodable(of: NaverShopping.self) { response in
                 switch response.result {
                 case .success(let data):

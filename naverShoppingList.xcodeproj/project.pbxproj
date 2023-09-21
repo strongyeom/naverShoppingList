@@ -17,6 +17,7 @@
 		263A75F82AAC5A56008294F8 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263A75F72AAC5A56008294F8 /* RealmRepository.swift */; };
 		26559C1F2ABC3CD500354C86 /* NaverAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C1E2ABC3CD500354C86 /* NaverAPIError.swift */; };
 		26559C242ABC55EA00354C86 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C232ABC55EA00354C86 /* BaseCollectionViewCell.swift */; };
+		26559C262ABC961100354C86 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C252ABC961100354C86 /* NetworkAPI.swift */; };
 		26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B42AAA15FD002061C4 /* AppDelegate.swift */; };
 		26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B62AAA15FD002061C4 /* SceneDelegate.swift */; };
 		26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B82AAA15FD002061C4 /* SearchViewController.swift */; };
@@ -48,6 +49,7 @@
 		263A75F72AAC5A56008294F8 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		26559C1E2ABC3CD500354C86 /* NaverAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAPIError.swift; sourceTree = "<group>"; };
 		26559C232ABC55EA00354C86 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		26559C252ABC961100354C86 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
 		26F617B12AAA15FD002061C4 /* naverShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = naverShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F617B42AAA15FD002061C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26F617B62AAA15FD002061C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				26F617D52AAA1D08002061C4 /* NetwokeManager.swift */,
+				26559C252ABC961100354C86 /* NetworkAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,
 				263A75B52AAAF4CB008294F8 /* Ext+UIButton.swift in Sources */,
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
+				26559C262ABC961100354C86 /* NetworkAPI.swift in Sources */,
 				26F617D62AAA1D08002061C4 /* NetwokeManager.swift in Sources */,
 				26559C1F2ABC3CD500354C86 /* NaverAPIError.swift in Sources */,
 				263A75B02AAAEB22008294F8 /* CategoryView.swift in Sources */,

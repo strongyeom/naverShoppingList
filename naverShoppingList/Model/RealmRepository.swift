@@ -11,7 +11,7 @@ import RealmSwift
 class RealmRepository {
     
     let realm = try! Realm()
-    
+
     // 데이터 저장하기
     func creatItem(item: Item) {
         
@@ -42,9 +42,10 @@ class RealmRepository {
         let result = realm.objects(LocalRealmDB.self).where {
             $0.title.contains(text, options: .caseInsensitive)
          }
-        
         return result
     }
+    
+    
     
     // Shopping 데이터 삭제하기
     func deleData(item: Results<LocalRealmDB>, shoppingIndex: Item) {

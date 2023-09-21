@@ -107,7 +107,8 @@ class SearchViewController: BaseViewController {
     }
     
     fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
-        NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
+        guard let searText else { return }
+        NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: searText, start: start, sort: .sim), searText: searText, start: start, sort: sort) { response in
             
             switch response {
             case .success(let success):

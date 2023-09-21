@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - NaverShopping
-struct NaverShopping: Codable {
+struct NaverShopping: Decodable {
     let total, start, display: Int
     var items: [Item]
 }
 
 // MARK: - Item
-struct Item: Codable {
+struct Item: Decodable {
     let title: String
     let image: String
     let lprice, mallName, productID: String
