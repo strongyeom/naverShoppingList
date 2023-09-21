@@ -17,12 +17,12 @@ class SearchViewController: UIViewController {
     
     var shoppingList = NaverShopping(total: 0, start: 0, display: 0, items: [])
     
-    lazy var searchCollectionView = {
+    private lazy var searchCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
         view.delegate = self
         view.dataSource = self
         view.prefetchDataSource = self
-        view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
+        view.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.identifier)
        // view.backgroundColor = .clear
         view.backgroundColor = .black
         return view
@@ -105,7 +105,7 @@ class SearchViewController: UIViewController {
         self.searchCollectionView.reloadData()
     }
     
-    func callRequest(searText: String?, start: Int, sort: ProductSort) {
+    fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
             
             switch response {
@@ -184,7 +184,7 @@ extension SearchViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
         
         let data = shoppingList.items[indexPath.item]
         

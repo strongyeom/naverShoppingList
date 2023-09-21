@@ -20,7 +20,7 @@ class ListViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
         view.delegate = self
         view.dataSource = self
-        view.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: BaseCollectionViewCell.identifier)
+        view.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.identifier)
         view.backgroundColor = .black
         return view
     }()
@@ -78,7 +78,7 @@ extension ListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BaseCollectionViewCell.identifier, for: indexPath) as? BaseCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
         let item = likedShoppingList[indexPath.item]
         
         
