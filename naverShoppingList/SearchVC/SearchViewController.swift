@@ -107,10 +107,18 @@ class SearchViewController: UIViewController {
     
     func callRequest(searText: String?, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(searText: searText, start: start, sort: sort) { response in
-           // print("viewdidload",response!)
-            guard let response else { return }
-            self.shoppingList.items.append(contentsOf: response.items)
-            self.searchCollectionView.reloadData()
+            
+            switch response {
+            case .success(let success):
+                self.shoppingList.items.append(contentsOf: success.items)
+                self.searchCollectionView.reloadData()
+            case .failure(let failure):
+                print(failure.naverErrorDescription)
+                let alert = UIAlertController(title: "오류가 발생하였습니다.", message: failure.naverErrorDescription, preferredStyle: .alert)
+                let ok = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(ok)
+                self.present(alert, animated: true)
+            }
         }
     }
     

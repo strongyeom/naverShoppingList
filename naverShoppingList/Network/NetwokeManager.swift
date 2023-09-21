@@ -15,11 +15,11 @@ class NetwokeManager {
     
 
     
-    func callRequest(searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (NaverShopping?) -> Void) {
+    func callRequest(searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (Result<NaverShopping, NaverAPIError>) -> Void) {
         guard let searText else { return }
         let text : String = searText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         
-        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=30&start=\(start)&sort=\(sort.rawValue)"
+        let url = "https://openapi.naver.com/v1/search/shop.json?query=\(text)&display=101&start=\(start)&sort=\(sort.rawValue)"
         print("url",url)
         
         let header: HTTPHeaders = [
@@ -32,9 +32,13 @@ class NetwokeManager {
             .responseDecodable(of: NaverShopping.self) { response in
                 switch response.result {
                 case .success(let data):
-                    completionHandler(data)
-                case .failure(let error):
-                    print(error.localizedDescription)
+                    completionHandler(.success(data))
+                case .failure(_):
+                    let status = response.response?.statusCode ?? 500
+                    guard let error = NaverAPIError(rawValue: status) else {
+                        return
+                    }
+                    completionHandler(.failure(error))
                 }
             }
     }
