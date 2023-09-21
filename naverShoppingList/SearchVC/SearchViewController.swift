@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import RealmSwift
 
-class SearchViewController: UIViewController {
+class SearchViewController: BaseViewController {
     
     let realmRepository = RealmRepository()
     
@@ -45,18 +45,19 @@ class SearchViewController: UIViewController {
     
     // MARK: - viewDidLoad
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        configureView()
-        setConstraints()
-        setNavigation(inputTitle: "쇼핑 검색")
-        setCategoriesButton()
         print(realmRepository.realm.configuration.fileURL!)
         print(#function)
-        
     }
  
-    func configureView() {
+    override func configureView() {
+        print(#function)
+        setConfigure()
+        setCategoriesButton()
+        setNavigation(inputTitle: "쇼핑 검색")
+    }
+    
+    func setConfigure() {
         view.addSubview(searchCollectionView)
         view.addSubview(searchView)
         view.addSubview(categortView)
@@ -122,7 +123,7 @@ class SearchViewController: UIViewController {
         }
     }
     
-    func setConstraints() {
+    override func setConstraints() {
         
         searchView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)

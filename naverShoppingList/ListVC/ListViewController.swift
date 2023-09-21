@@ -10,7 +10,7 @@ import RealmSwift
 import SnapKit
 
 
-class ListViewController: UIViewController {
+class ListViewController: BaseViewController {
     
     let realmRepository = RealmRepository()
     
@@ -29,10 +29,6 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        likedShoppingList = realmRepository.fetch()
-        configureView()
-        setConstraints()
-        setNavigation(inputTitle: "좋아요 목록")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,13 +38,19 @@ class ListViewController: UIViewController {
         self.listCollectionView.reloadData()
     }
     
-   fileprivate func configureView() {
-        view.addSubview(listCollectionView)
-        view.addSubview(searchView)
+   override func configureView() {
+       setConfigure()
+       likedShoppingList = realmRepository.fetch()
+       setNavigation(inputTitle: "좋아요 목록")
         searchView.searchBar.delegate = self
     }
     
-    fileprivate func setConstraints() {
+    fileprivate func setConfigure() {
+        view.addSubview(listCollectionView)
+        view.addSubview(searchView)
+    }
+    
+    override func setConstraints() {
         searchView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.top.equalTo(view.safeAreaLayoutGuide)
