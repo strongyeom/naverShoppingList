@@ -13,9 +13,16 @@ class SearchViewController: BaseViewController {
     
     let realmRepository = RealmRepository()
     
-    var likedShoppingList: Results<LocalRealmDB>!
+    var likedShoppingList: Results<LocalRealmDB>! {
+        didSet {
+            print("shoppingList가 변화되었다.")
+            self.searchCollectionView.reloadData()
+        }
+    }
+        
+    var shoppingList = NaverShopping(total: 0, start: 1, display: 0, items: [])
     
-    var shoppingList = NaverShopping(total: 0, start: 0, display: 0, items: [])
+
     
     private lazy var searchCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
@@ -70,6 +77,7 @@ class SearchViewController: BaseViewController {
         }
     }
     
+    
     @objc func sortBtnClicked(_ sender: UIButton) {
         
         if shoppingList.items.count > 1 {
@@ -103,7 +111,7 @@ class SearchViewController: BaseViewController {
         
         likedShoppingList = realmRepository.fetch()
         print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
-        self.searchCollectionView.reloadData()
+       // self.searchCollectionView.reloadData()
     }
     
     fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
