@@ -16,7 +16,7 @@ class ListViewController: UIViewController {
     
     var likedShoppingList: Results<LocalRealmDB>!
     
-    lazy var listCollectionView = {
+    private lazy var listCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
         view.delegate = self
         view.dataSource = self
@@ -25,7 +25,7 @@ class ListViewController: UIViewController {
         return view
     }()
     
-    let searchView =  SearchView()
+    private let searchView =  SearchView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +42,13 @@ class ListViewController: UIViewController {
         self.listCollectionView.reloadData()
     }
     
-    func configureView() {
+   fileprivate func configureView() {
         view.addSubview(listCollectionView)
         view.addSubview(searchView)
         searchView.searchBar.delegate = self
     }
     
-    func setConstraints() {
+    fileprivate func setConstraints() {
         searchView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
             make.top.equalTo(view.safeAreaLayoutGuide)

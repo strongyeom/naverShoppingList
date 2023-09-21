@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class NetwokeManager {
+final class NetwokeManager {
     static let shared = NetwokeManager()
     
     private init() { }
