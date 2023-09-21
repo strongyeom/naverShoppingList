@@ -10,7 +10,8 @@ import UIKit
 extension String {
     
     func encodingText() -> String {
-        let result = self.components(separatedBy: ["<","b","/",">"]).joined()
+        let result = self.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        
         return result
     }
     
