@@ -15,7 +15,7 @@ final class NetwokeManager {
     
 
     
-    func callRequest(api: NetworkAPI, searText: String?, start: Int, sort: ProductSort, completionHandler: @escaping (Result<NaverShopping, NaverAPIError>) -> Void) {
+    func callRequest(api: NetworkAPI, completionHandler: @escaping (Result<NaverShopping, NaverAPIError>) -> Void) {
 
         // Alamofire에서 ErrorHandling을 하려면 어떻게 할까?
         AF.request(api.endPoint, parameters: api.query, headers: api.header).validate(statusCode: 200...500)

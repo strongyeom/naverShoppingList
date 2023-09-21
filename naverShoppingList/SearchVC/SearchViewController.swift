@@ -115,12 +115,14 @@ class SearchViewController: BaseViewController {
     }
     
     fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
+        print(#function)
         guard let searText else { return }
-        NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: searText, start: start, sort: .sim), searText: searText, start: start, sort: sort) { response in
+        NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: searText, start: start, sort: sort)) { response in
             
             switch response {
             case .success(let success):
                 self.shoppingList.items.append(contentsOf: success.items)
+                print(self.shoppingList.items.count)
                 self.searchCollectionView.reloadData()
             case .failure(let failure):
                 print(failure.naverErrorDescription)
