@@ -80,6 +80,9 @@ class SearchViewController: BaseViewController {
     
     @objc func sortBtnClicked(_ sender: UIButton) {
         
+        if BtnArray[sender.tag].isSelected == true {
+            return
+        }
         if shoppingList.items.count > 1 {
             print("버튼이 눌렸다 \(sender.tag)")
 
@@ -93,6 +96,7 @@ class SearchViewController: BaseViewController {
                          Btn.isSelected = true
                          Btn.setTitleColor(.black, for: .normal)
                          Btn.backgroundColor = UIColor.white
+                         callRequest(searText: userInputText, start: start, sort: sort)
                      } else {
                          // 이 함수를 호출한 버튼이 아니라면
                          Btn.isSelected = false
@@ -100,8 +104,7 @@ class SearchViewController: BaseViewController {
                          Btn.backgroundColor = .clear
                      }
                  }
-           
-            callRequest(searText: userInputText, start: start, sort: sort)
+            print("조건문 이후 ",BtnArray[sender.tag].isSelected)
         }
 
     }
