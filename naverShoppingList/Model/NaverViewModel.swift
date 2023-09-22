@@ -14,14 +14,10 @@ class NaverViewModel {
     
     var naverShopping = Observable(NaverShopping(total: 0, start: 0, display: 0, items: []))
     
-    //    var realmData = Observable(LocalRealmDB(id: "", imageurl: "", malName: "", title: "", price: ""))
+    lazy var realmData = Observable(realmRepository.fetch())
     
-    var realmType : Results<LocalRealmDB>!
-    
-    lazy var realmData = Observable(realmType!)
-    
-    
-    
+   // lazy var listData = Observable<[LocalRealmDB]>([])
+
     func request(query: String?, start: Int, sort: ProductSort) {
         NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: query, start: start, sort: sort)) { response in
             switch response {
@@ -35,11 +31,11 @@ class NaverViewModel {
     }
     
     func addRealm(item: Item) {
-        realmRepository.creatItem(item: item)
+      realmRepository.creatItem(item: item)
+      
     }
     
-    // 데이터 불러오기
-    func fetch(){
+    func fetch() {
         realmData.value = realmRepository.fetch()
     }
 }

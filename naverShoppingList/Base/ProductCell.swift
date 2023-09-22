@@ -13,6 +13,8 @@ class ProductCell : BaseCollectionViewCell {
     
     let realmRepository = RealmRepository()
     
+    let viewModel = NaverViewModel()
+    
     let shoppingImage = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
@@ -128,11 +130,12 @@ class ProductCell : BaseCollectionViewCell {
                 String($0.id) == item.productID
             }) {
                 // 포함되어 있으면
-                realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: item)
+                realmRepository.deleData(item: viewModel.realmData.value, shoppingIndex: item)
                 self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
             } else {
                 // 포함되어 있지 않다면
-                realmRepository.creatItem(item: item)
+               // realmRepository.creatItem(item: item)
+                viewModel.addRealm(item: item)
                 self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             }
         }
@@ -140,7 +143,6 @@ class ProductCell : BaseCollectionViewCell {
     
     func imageDownSizingToKingFisher(item: Item) {
         let url = URL(string: item.image)!
-        print("***", shoppingImage.bounds.size)
         // 첫 로드시 안됐던 이유는 size에 shoppingImage.bounds.size 들어가 있어서 크기가 정해져 있지 않았기 때문에 이미지가 보여지지 않음
         // size == 해상도라고 생각하면됨 ex) 디스크에 720p -> 메모리 240p로 다운 사이징해서 보여줌
         let processor = DownsamplingImageProcessor(size: .init(width: 150, height: 150))

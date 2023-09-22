@@ -14,14 +14,15 @@ class SearchViewController: BaseViewController {
     let realmRepository = RealmRepository()
     
     var likedShoppingList: Results<LocalRealmDB>! {
+        
         didSet {
-            print("shoppingList가 변화되었다.")
-            self.searchCollectionView.reloadData()
+          //  print("shoppingList가 변화되었다.",self.likedShoppingList)
+           // self.searchCollectionView.reloadData()
         }
     }
     
     let viewModel = NaverViewModel()
-
+    
     
     private lazy var searchCollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: settingCollectionViewFlowLayout())
@@ -34,7 +35,7 @@ class SearchViewController: BaseViewController {
     }()
     
     lazy var searchView = {
-       let search =  SearchView()
+        let search =  SearchView()
         search.searchBar.delegate = self
         return search
     }()
@@ -54,7 +55,7 @@ class SearchViewController: BaseViewController {
         print(realmRepository.realm.configuration.fileURL!)
         print(#function)
     }
- 
+    
     override func configureView() {
         print(#function)
         setConfigure()
@@ -65,6 +66,17 @@ class SearchViewController: BaseViewController {
                 self.searchCollectionView.reloadData()
             }
         }
+        viewModel.fetch()
+        
+//        viewModel.listData.bind { realmData in
+//            print(realmData)
+//           // self.searchCollectionView.reloadData()
+//        }
+//        
+        viewModel.realmData.bind { realmData in
+            print("****",realmData)
+        }
+        
     }
     
     func setConfigure() {
@@ -88,35 +100,40 @@ class SearchViewController: BaseViewController {
         }
         if viewModel.naverShopping.value.items.count > 1 {
             print("버튼이 눌렸다 \(sender.tag)")
-
+            
             self.viewModel.naverShopping.value.items.removeAll()
             let selectedSort: ProductSort = ProductSort.allCases[sender.tag]
-
+            
             for Btn in BtnArray {
-                     if Btn == sender {
-                         // 만약 현재 버튼이 이 함수를 호출한 버튼이라면
-                         sort = selectedSort
-                         Btn.isSelected = true
-                         Btn.setTitleColor(.black, for: .normal)
-                         Btn.backgroundColor = UIColor.white
-                         viewModel.request(query: userInputText, start: start, sort: sort)
-                     } else {
-                         // 이 함수를 호출한 버튼이 아니라면
-                         Btn.isSelected = false
-                         Btn.setTitleColor(.white, for: .normal)
-                         Btn.backgroundColor = .clear
-                     }
-                 }
+                if Btn == sender {
+                    // 만약 현재 버튼이 이 함수를 호출한 버튼이라면
+                    sort = selectedSort
+                    Btn.isSelected = true
+                    Btn.setTitleColor(.black, for: .normal)
+                    Btn.backgroundColor = UIColor.white
+                    viewModel.request(query: userInputText, start: start, sort: sort)
+                } else {
+                    // 이 함수를 호출한 버튼이 아니라면
+                    Btn.isSelected = false
+                    Btn.setTitleColor(.white, for: .normal)
+                    Btn.backgroundColor = .clear
+                }
+            }
             print("조건문 이후 ",BtnArray[sender.tag].isSelected)
         }
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        likedShoppingList = realmRepository.fetch()
-        print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
+        //  likedShoppingList = realmRepository.fetch()
+        
+        //        viewModel.realmData.bind { realmData in
+        //            print(realmData)
+        //        }
+        
+       // print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
     }
     override func setConstraints() {
         
@@ -183,11 +200,11 @@ extension SearchViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
         let item = viewModel.naverShopping.value.items[indexPath.item]
         cell.settupCell(item: item)
-      
+        
         return cell
     }
     
-
+    
 }
 
 // MARK: - UISearchBarDelegate
@@ -204,7 +221,7 @@ extension SearchViewController: UISearchBarDelegate {
         
         userInputText = searchBar.text?.lowercased()
         self.viewModel.naverShopping.value.items.removeAll()
-            start = 1
+        start = 1
         viewModel.request(query: userInputText, start: start, sort: sort)
         
         searchBar.resignFirstResponder()
