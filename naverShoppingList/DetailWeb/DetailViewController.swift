@@ -17,7 +17,7 @@ class DetailViewController: UIViewController {
     
     var likeButtonImage: UIImage?
     var webView: WKWebView = WKWebView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -27,16 +27,16 @@ class DetailViewController: UIViewController {
     func configureView() {
         view.addSubview(webView)
         
-     
+        
         
         guard let detailProduct else { return }
         
         
-         if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID}) {
-             likeButtonImage =  UIImage(systemName: "heart.fill")
-         } else {
-             likeButtonImage = UIImage(systemName: "heart")
-         }
+        if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID}) {
+            likeButtonImage =  UIImage(systemName: "heart.fill")
+        } else {
+            likeButtonImage = UIImage(systemName: "heart")
+        }
         
         let myURL = URL(string:"https://msearch.shopping.naver.com/product/\(detailProduct.productID)")
         let myRequest = URLRequest(url: myURL!)
@@ -51,15 +51,12 @@ class DetailViewController: UIViewController {
         print("좋아요 버튼 ")
         guard let detailProduct else { return }
         // 좋아요 눌렸으면 하트 색상 바꿔져 있어야함
+
+        var isContainRealm = realmRepository.filterId(value: detailProduct)
+
+        let image = isContainRealm ? UIImage(systemName: "heart") : UIImage(systemName: "heart.fill")
         
-        if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID }) {
-            realmRepository.deleData(item: realmRepository.fetch(), shoppingIndex: detailProduct)
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart")
-        } else {
-            realmRepository.creatItem(item: detailProduct)
-            navigationItem.rightBarButtonItem?.image = UIImage(systemName: "heart.fill")
-        }
-        
+        navigationItem.rightBarButtonItem?.image = image
         
     }
     
@@ -68,7 +65,7 @@ class DetailViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
-
+    
 }
 
 extension DetailViewController: WKUIDelegate, UINavigationControllerDelegate {

@@ -46,13 +46,38 @@ class RealmRepository {
     }
     
     
+    func filterId(value: Item) -> Bool {
+        let result = realm.object(ofType: LocalRealmDB.self, forPrimaryKey: value.productID)
+        print(result)
+        if result != nil {
+            RealmRepository().deleData(item: RealmRepository().fetch(), shoppingIndex: value)
+            return true
+        } else {
+            RealmRepository().creatItem(item: value)
+            return false
+        }
+        
+    }
+    
+    func filterItem(value: Item) -> LocalRealmDB? {
+        let result = realm.object(ofType: LocalRealmDB.self, forPrimaryKey: value.productID)
+        return result
+    }
+    
+    func filterRealm(value: LocalRealmDB) -> LocalRealmDB? {
+        let result = realm.object(ofType: LocalRealmDB.self, forPrimaryKey: value.id)
+        return result
+    }
+    
+    
+    
     
     // Shopping 데이터 삭제하기
     func deleData(item: Results<LocalRealmDB>, shoppingIndex: Item) {
         do {
-            
             try realm.write {
-                let itemDelete = item.where{ $0.id == shoppingIndex.productID }
+                let itemDelete = filterItem(value: shoppingIndex)
+                guard let itemDelete else { return }
                 realm.delete(itemDelete)
             }
         } catch {
@@ -65,8 +90,10 @@ class RealmRepository {
         do {
             
             try realm.write {
-                let itemDelete = item.where{ $0.id == realmIndex.id }
+                let itemDelete = filterRealm(value: realmIndex)
+                guard let itemDelete else { return }
                 realm.delete(itemDelete)
+                
             }
         } catch {
             print("Realm에 저장된 데이터를 삭제하지 못했습니다. : \(error.localizedDescription)")
