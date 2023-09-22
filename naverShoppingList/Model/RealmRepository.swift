@@ -50,13 +50,12 @@ class RealmRepository {
         let result = realm.object(ofType: LocalRealmDB.self, forPrimaryKey: value.productID)
         print(result)
         if result != nil {
-            RealmRepository().deleData(item: RealmRepository().fetch(), shoppingIndex: value)
+//            RealmRepository().deleData(item: RealmRepository().fetch(), shoppingIndex: value)
             return true
         } else {
-            RealmRepository().creatItem(item: value)
+          //  RealmRepository().creatItem(item: value)
             return false
         }
-        
     }
     
     func filterItem(value: Item) -> LocalRealmDB? {

@@ -32,7 +32,8 @@ class DetailViewController: UIViewController {
         guard let detailProduct else { return }
         
         
-        if realmRepository.fetch().contains(where: { $0.id == detailProduct.productID}) {
+        
+        if realmRepository.filterId(value: detailProduct) {
             likeButtonImage =  UIImage(systemName: "heart.fill")
         } else {
             likeButtonImage = UIImage(systemName: "heart")
@@ -52,9 +53,16 @@ class DetailViewController: UIViewController {
         guard let detailProduct else { return }
         // 좋아요 눌렸으면 하트 색상 바꿔져 있어야함
 
-        var isContainRealm = realmRepository.filterId(value: detailProduct)
+        let isContainRealm = realmRepository.filterId(value: detailProduct)
 
         let image = isContainRealm ? UIImage(systemName: "heart") : UIImage(systemName: "heart.fill")
+        
+        if isContainRealm {
+            
+            realmRepository.deleData(item: RealmRepository().fetch(), shoppingIndex: detailProduct)
+        } else {
+            realmRepository.creatItem(item: detailProduct)
+        }
         
         navigationItem.rightBarButtonItem?.image = image
         
