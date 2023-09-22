@@ -104,10 +104,10 @@ class ProductCell : BaseCollectionViewCell {
     
     // Search VC에서 부를때
     func settupCell(item: Item) {
-        
-        
-        let url = URL(string: item.image)!
-        self.shoppingImage.kf.setImage(with: url)
+//
+//        let url = URL(string: item.image)!
+//        self.shoppingImage.kf.setImage(with: url)
+        imageDownSizingToKingFisher(item: item)
         self.malNameLabel.text =  "[\(item.mallName)]"
         self.productName.text = item.title.encodingText()
         self.priceLabel.text =  "\(item.lprice.numberToThreeCommaString())원"
@@ -136,6 +136,23 @@ class ProductCell : BaseCollectionViewCell {
                 self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             }
         }
+    }
+    
+    func imageDownSizingToKingFisher(item: Item) {
+        let url = URL(string: item.image)!
+        print("***", shoppingImage.bounds.size)
+        // 첫 로드시 안됐던 이유는 size에 shoppingImage.bounds.size 들어가 있어서 크기가 정해져 있지 않았기 때문에 이미지가 보여지지 않음
+        // size == 해상도라고 생각하면됨 ex) 디스크에 720p -> 메모리 240p로 다운 사이징해서 보여줌
+        let processor = DownsamplingImageProcessor(size: .init(width: 150, height: 150))
+            self.shoppingImage.kf.setImage(
+                with: url,
+                options: [
+                    .processor(processor),
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ]
+            )
     }
 
     // Like VC에서 부를 때
