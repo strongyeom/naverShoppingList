@@ -14,7 +14,7 @@ enum NetworkAPI {
         return "https://openapi.naver.com/v1/search/shop.json?display=30"
     }
     
-    case naverShopping(query: String, start: Int, sort: ProductSort)
+    case naverShopping(query: String?, start: Int, sort: ProductSort)
     
     var endPoint: URL {
         switch self {
@@ -33,7 +33,7 @@ enum NetworkAPI {
     var query: [String: Any] {
         switch self {
         case .naverShopping(let query, let start, let sort):
-            return ["query": query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
+            return ["query": query ?? "".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
              "start": start,
              "sort": sort.rawValue] as [String : Any]
         }

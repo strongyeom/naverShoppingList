@@ -18,6 +18,8 @@
 		26559C1F2ABC3CD500354C86 /* NaverAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C1E2ABC3CD500354C86 /* NaverAPIError.swift */; };
 		26559C242ABC55EA00354C86 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C232ABC55EA00354C86 /* BaseCollectionViewCell.swift */; };
 		26559C262ABC961100354C86 /* NetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26559C252ABC961100354C86 /* NetworkAPI.swift */; };
+		26E773AE2ABDA31C00D72E60 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E773AD2ABDA31C00D72E60 /* Observable.swift */; };
+		26E773B02ABDA3AA00D72E60 /* NaverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E773AF2ABDA3AA00D72E60 /* NaverViewModel.swift */; };
 		26F617B52AAA15FD002061C4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B42AAA15FD002061C4 /* AppDelegate.swift */; };
 		26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B62AAA15FD002061C4 /* SceneDelegate.swift */; };
 		26F617B92AAA15FD002061C4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F617B82AAA15FD002061C4 /* SearchViewController.swift */; };
@@ -50,6 +52,8 @@
 		26559C1E2ABC3CD500354C86 /* NaverAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAPIError.swift; sourceTree = "<group>"; };
 		26559C232ABC55EA00354C86 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		26559C252ABC961100354C86 /* NetworkAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPI.swift; sourceTree = "<group>"; };
+		26E773AD2ABDA31C00D72E60 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		26E773AF2ABDA3AA00D72E60 /* NaverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverViewModel.swift; sourceTree = "<group>"; };
 		26F617B12AAA15FD002061C4 /* naverShoppingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = naverShoppingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26F617B42AAA15FD002061C4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26F617B62AAA15FD002061C4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +107,14 @@
 			path = DetailWeb;
 			sourceTree = "<group>";
 		};
+		26E773AC2ABDA30B00D72E60 /* Observable */ = {
+			isa = PBXGroup;
+			children = (
+				26E773AD2ABDA31C00D72E60 /* Observable.swift */,
+			);
+			path = Observable;
+			sourceTree = "<group>";
+		};
 		26F617A82AAA15FD002061C4 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +136,7 @@
 			children = (
 				26F617B42AAA15FD002061C4 /* AppDelegate.swift */,
 				26F617B62AAA15FD002061C4 /* SceneDelegate.swift */,
+				26E773AC2ABDA30B00D72E60 /* Observable */,
 				263A75B32AAAF4BF008294F8 /* Ext */,
 				26F617F92AAA3935002061C4 /* Protocol */,
 				26F617EF2AAA34AE002061C4 /* Base */,
@@ -171,6 +184,7 @@
 				26F617D22AAA1C27002061C4 /* NaverShopping.swift */,
 				26F617EA2AAA2DF3002061C4 /* LocalRealmDB.swift */,
 				263A75F72AAC5A56008294F8 /* RealmRepository.swift */,
+				26E773AF2ABDA3AA00D72E60 /* NaverViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +327,8 @@
 				263A75BB2AAB0AC9008294F8 /* DetailViewController.swift in Sources */,
 				26F617CD2AAA1734002061C4 /* ListViewController.swift in Sources */,
 				26F617E22AAA203D002061C4 /* ProductSort.swift in Sources */,
+				26E773B02ABDA3AA00D72E60 /* NaverViewModel.swift in Sources */,
+				26E773AE2ABDA31C00D72E60 /* Observable.swift in Sources */,
 				263A75B52AAAF4CB008294F8 /* Ext+UIButton.swift in Sources */,
 				26F617B72AAA15FD002061C4 /* SceneDelegate.swift in Sources */,
 				26559C262ABC961100354C86 /* NetworkAPI.swift in Sources */,

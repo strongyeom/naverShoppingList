@@ -20,8 +20,9 @@ class SearchViewController: BaseViewController {
         }
     }
         
-    var shoppingList = NaverShopping(total: 0, start: 1, display: 0, items: [])
+  //  var shoppingList = NaverShopping(total: 0, start: 1, display: 0, items: [])
     
+    let viewModel = NaverViewModel()
 
     
     private lazy var searchCollectionView = {
@@ -62,6 +63,11 @@ class SearchViewController: BaseViewController {
         setConfigure()
         setCategoriesButton()
         setNavigation(inputTitle: "쇼핑 검색")
+        viewModel.naverShopping.bind { _ in
+            DispatchQueue.main.async {
+                self.searchCollectionView.reloadData()
+            }
+        }
     }
     
     func setConfigure() {
@@ -83,10 +89,10 @@ class SearchViewController: BaseViewController {
         if BtnArray[sender.tag].isSelected == true {
             return
         }
-        if shoppingList.items.count > 1 {
+        if viewModel.naverShopping.value.items.count > 1 {
             print("버튼이 눌렸다 \(sender.tag)")
 
-            self.shoppingList.items.removeAll()
+            self.viewModel.naverShopping.value.items.removeAll()
             let selectedSort: ProductSort = ProductSort.allCases[sender.tag]
 
             for Btn in BtnArray {
@@ -96,7 +102,8 @@ class SearchViewController: BaseViewController {
                          Btn.isSelected = true
                          Btn.setTitleColor(.black, for: .normal)
                          Btn.backgroundColor = UIColor.white
-                         callRequest(searText: userInputText, start: start, sort: sort)
+                       //  callRequest(searText: userInputText, start: start, sort: sort)
+                         viewModel.request(query: userInputText, start: start, sort: sort)
                      } else {
                          // 이 함수를 호출한 버튼이 아니라면
                          Btn.isSelected = false
@@ -116,26 +123,26 @@ class SearchViewController: BaseViewController {
         print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
        // self.searchCollectionView.reloadData()
     }
-    
-    fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
-        print(#function)
-        guard let searText else { return }
-        NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: searText, start: start, sort: sort)) { response in
-            
-            switch response {
-            case .success(let success):
-                self.shoppingList.items.append(contentsOf: success.items)
-                print(self.shoppingList.items.count)
-                self.searchCollectionView.reloadData()
-            case .failure(let failure):
-                print(failure.naverErrorDescription)
-                let alert = UIAlertController(title: "오류가 발생하였습니다.", message: failure.naverErrorDescription, preferredStyle: .alert)
-                let ok = UIAlertAction(title: "확인", style: .default)
-                alert.addAction(ok)
-                self.present(alert, animated: true)
-            }
-        }
-    }
+//
+//    fileprivate func callRequest(searText: String?, start: Int, sort: ProductSort) {
+//        print(#function)
+//        guard let searText else { return }
+//        NetwokeManager.shared.callRequest(api: NetworkAPI.naverShopping(query: searText, start: start, sort: sort)) { response in
+//
+//            switch response {
+//            case .success(let success):
+//                self.shoppingList.items.append(contentsOf: success.items)
+//                print(self.shoppingList.items.count)
+//                self.searchCollectionView.reloadData()
+//            case .failure(let failure):
+//                print(failure.naverErrorDescription)
+//                let alert = UIAlertController(title: "오류가 발생하였습니다.", message: failure.naverErrorDescription, preferredStyle: .alert)
+//                let ok = UIAlertAction(title: "확인", style: .default)
+//                alert.addAction(ok)
+//                self.present(alert, animated: true)
+//            }
+//        }
+//    }
     
     override func setConstraints() {
         
@@ -169,9 +176,10 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
         // 또한 마지막 페이지가 나오면 더이상 page를 증가시키지 않는다.
         for indexPath in indexPaths {
             
-            if shoppingList.items.count - 1 == indexPath.item {
+            if viewModel.naverShopping.value.items.count - 1 == indexPath.item {
                 start += 1
-                callRequest(searText: userInputText, start: start, sort: sort)
+               // callRequest(searText: userInputText, start: start, sort: sort)
+                viewModel.request(query: userInputText, start: start, sort: sort)
             }
         }
     }
@@ -184,7 +192,9 @@ extension SearchViewController: UICollectionViewDataSourcePrefetching {
 // MARK: - UICollectionViewDelegate
 extension SearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedCell = shoppingList.items[indexPath.item]
+        // viewModel.naverShopping.value.items
+       // let selectedCell = shoppingList.items[indexPath.item]
+        let selectedCell = viewModel.naverShopping.value.items[indexPath.item]
         print("selectedCell : \(selectedCell)")
         let vc = DetailViewController()
         vc.detailProduct = selectedCell
@@ -195,15 +205,17 @@ extension SearchViewController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension SearchViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shoppingList.items.count
+      //  return shoppingList.items.count
+        return viewModel.naverShopping.value.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.identifier, for: indexPath) as? ProductCell else { return UICollectionViewCell() }
+        let item = viewModel.naverShopping.value.items[indexPath.item]
+       // let data = shoppingList.items[indexPath.item]
         
-        let data = shoppingList.items[indexPath.item]
-        
-        cell.settupCell(item: data)
+       // cell.settupCell(item: data)
+        cell.settupCell(item: item)
       
         return cell
     }
@@ -224,9 +236,11 @@ extension SearchViewController: UISearchBarDelegate {
         print("리턴 버튼 눌림")
         
         userInputText = searchBar.text?.lowercased()
-            self.shoppingList.items.removeAll()
+            // self.shoppingList.items.removeAll()
+        self.viewModel.naverShopping.value.items.removeAll()
             start = 1
-            callRequest(searText: userInputText, start: start, sort: sort)
+           // callRequest(searText: userInputText, start: start, sort: sort)
+        viewModel.request(query: userInputText, start: start, sort: sort)
         
         searchBar.resignFirstResponder()
     }
