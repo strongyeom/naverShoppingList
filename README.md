@@ -1,11 +1,10 @@
-# naverShoppingList
-2차 Recap NaverShoppingList 
 
 # NaverShoppingList
 
 > Realm과 네이버 shopping API를 활용한 프로젝트 
 
-<br> 
+![‎naverShoppingImages ‎002](https://github.com/strongyeom/naverShoppingList/assets/101084872/3c8a857c-c578-49f2-9059-fe38e7f95cad)
+
 
 # 목차
 
