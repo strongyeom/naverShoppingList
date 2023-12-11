@@ -3,7 +3,7 @@
 
 > Realm과 네이버 shopping API를 활용한 프로젝트 
 
-![‎naverShoppingImages ‎002](https://github.com/strongyeom/naverShoppingList/assets/101084872/3c8a857c-c578-49f2-9059-fe38e7f95cad)
+![‎naverShoppingImages ‎002](https://github.com/strongyeom/naverShoppingList/assets/101084872/1d161074-f6de-4774-bbf7-90e416485dd4)
 
 
 # 목차
