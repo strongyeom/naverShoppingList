@@ -13,14 +13,7 @@ class SearchViewController: BaseViewController {
     
     let realmRepository = RealmRepository()
     
-    var likedShoppingList: Results<LocalRealmDB>! {
-        
-        didSet {
-          //  print("shoppingList가 변화되었다.",self.likedShoppingList)
-           // self.searchCollectionView.reloadData()
-        }
-    }
-    
+    var likedShoppingList: Results<LocalRealmDB>!
     let viewModel = NaverViewModel()
     
     
@@ -35,7 +28,7 @@ class SearchViewController: BaseViewController {
     }()
     
     lazy var searchView = {
-        let search =  SearchView()
+        let search = SearchView()
         search.searchBar.delegate = self
         return search
     }()
@@ -67,12 +60,7 @@ class SearchViewController: BaseViewController {
             }
         }
         viewModel.fetch()
-        
-//        viewModel.listData.bind { realmData in
-//            print(realmData)
-//           // self.searchCollectionView.reloadData()
-//        }
-//        
+       
         viewModel.realmData.bind { realmData in
             print("****",realmData)
         }
@@ -124,17 +112,6 @@ class SearchViewController: BaseViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //  likedShoppingList = realmRepository.fetch()
-        
-        //        viewModel.realmData.bind { realmData in
-        //            print(realmData)
-        //        }
-        
-       // print("Realm에 저장된 데이터들 Search : \(likedShoppingList)")
-    }
     override func setConstraints() {
         
         searchView.snp.makeConstraints { make in
@@ -209,6 +186,8 @@ extension SearchViewController: UICollectionViewDataSource {
 
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
+    
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
