@@ -24,7 +24,7 @@ class ListViewController: BaseViewController {
         view.backgroundColor = .black
         return view
     }()
-    
+    let viewModel = NaverViewModel()
     private let searchView =  SearchView()
     
     override func viewDidLoad() {
@@ -40,7 +40,11 @@ class ListViewController: BaseViewController {
     
    override func configureView() {
        setConfigure()
-       likedShoppingList = realmRepository.fetch()
+       
+       viewModel.fetch()
+       viewModel.realmData.bind { realmData in
+           self.likedShoppingList = realmData
+       }
        setNavigation(inputTitle: "좋아요 목록")
         searchView.searchBar.delegate = self
     }

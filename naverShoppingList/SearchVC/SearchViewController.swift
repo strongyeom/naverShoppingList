@@ -59,12 +59,6 @@ class SearchViewController: BaseViewController {
                 self.searchCollectionView.reloadData()
             }
         }
-        viewModel.fetch()
-       
-        viewModel.realmData.bind { realmData in
-            print("****",realmData)
-        }
-        
     }
     
     func setConfigure() {

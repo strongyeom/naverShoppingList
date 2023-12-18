@@ -159,11 +159,12 @@ class ProductCell : BaseCollectionViewCell {
 
     // Like VC에서 부를 때
     func likedSettupCell(item: LocalRealmDB) {
+        print("LocalRealmDB - \(item)")
         let url = URL(string: item.imageurl)!
         self.shoppingImage.kf.setImage(with: url)
         self.malNameLabel.text = "[\(item.malName)]"
         self.productName.text = item.title.encodingText()
-        self.priceLabel.text =  "\(item.price.numberToThreeCommaString())원"
+        self.priceLabel.text =  "\(item.price)원"
         
         if realmRepository.fetch().contains(where: { $0.id == item.id}) {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
